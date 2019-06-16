@@ -1,10 +1,5 @@
-test:
-	pytest --pylint --flake8 --mypy
-
-format:
-	black .
-	isort -y
-
 dev:
 	pip install -r requirements.txt
-	pre-commit install
+	pip install -r requirements-dev.txt
+	jupyter contrib nbextension install --user
+	jupyter nbextensions_configurator enable --user

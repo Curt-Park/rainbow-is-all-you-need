@@ -9,19 +9,3 @@ cloudpickle
 opencv-python
 wandb
 pre-commit
-
-# formatting
-black
-isort
-
-# testing
-pylint == 2.3.0
-mypy == 0.670
-flake8 == 3.7.7
-flake8-bugbear == 18.8.0
-flake8-docstrings == 1.3.0
-pluggy == 0.8.1
-pytest == 4.2.0
-pytest-pylint == 0.14.0
-pytest-flake8 == 1.0.4
-pytest-mypy == 0.3.2
