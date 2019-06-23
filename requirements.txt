@@ -3,9 +3,6 @@ torch==1.0.1
 gym
 gym[atari]
 box2d-py
-scipy
 typing
-cloudpickle
 opencv-python
-wandb
-pre-commit
+matplotlib
