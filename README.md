@@ -18,15 +18,15 @@ Every single topic is almost fully self-contained with both theoretical backgrou
 ## Prerequisites
 This repository is tested on [Anaconda](https://www.anaconda.com/distribution/) virtual environment with python 3.6.1+
 ```
-$ conda create -n 2nd_dlcat_rainbow python=3.6.1
-$ conda activate 2nd_dlcat_rainbow
+$ conda create -n rainbow-is-all-you-need python=3.6.1
+$ conda activate rainbow-is-all-you-need
 ```
 
 ## Installation
 First, clone the repository.
 ```
-git clone https://github.com/Curt-Park/2nd_dlcat_rainbow.git
-cd 2nd_dlcat_rainbow
+git clone https://github.com/Curt-Park/rainbow-is-all-you-need.git
+cd rainbow-is-all-you-need
 ```
 
 Secondly, install packages required to execute the code. Just type:
