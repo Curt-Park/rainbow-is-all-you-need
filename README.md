@@ -1,7 +1,7 @@
 # Somewhere over the Rainbow, from Cartpole to Pong
 
 Step-by-step tutorials from DQN to Rainbow, even including learning from demonstrations (DQfD)!
-Every single topic is almost fully self-contained with both theoretical backgrounds and object-oriented implementation, so you can pick any topic in that you are interested, and just learn and run it.
+Every single topic is almost fully self-contained with both theoretical backgrounds and object-oriented implementation, so you can pick any topic in which you are interested, and just learn and run it.
 
 ## Contents
 
