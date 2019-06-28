@@ -18,8 +18,8 @@ Every single topic is almost fully self-contained with both theoretical backgrou
 ## Prerequisites
 This repository is tested on [Anaconda](https://www.anaconda.com/distribution/) virtual environment with python 3.6.1+
 ```
-$ conda create -n rainbow-is-all-you-need python=3.6.1
-$ conda activate rainbow-is-all-you-need
+$ conda create -n rainbow_is_all_you_need python=3.6.1
+$ conda activate rainbow_is_all_you_need
 ```
 
 ## Installation
