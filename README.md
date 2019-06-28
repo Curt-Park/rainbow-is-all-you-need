@@ -31,7 +31,7 @@ cd rainbow-is-all-you-need
 
 Secondly, install packages required to execute the code. Just type:
 ```
-make dev
+make dep
 ```
 
 ## References

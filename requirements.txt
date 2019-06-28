@@ -6,3 +6,4 @@ box2d-py
 typing
 opencv-python
 matplotlib
+jupyter
