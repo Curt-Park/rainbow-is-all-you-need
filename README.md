@@ -1,7 +1,7 @@
 # Somewhere over the Rainbow, from Cartpole to Pong
 
-Step-by-step tutorials from DQN to Rainbow, even including learning from demonstrations (DQfD)!
-Every single topic is almost fully self-contained with both theoretical backgrounds and object-oriented implementation, so you can pick any topic in which you are interested, and just learn and run it.
+Step-by-step tutorials from DQN to Rainbow, even including learning from demonstrations (DQfD).
+Every tutorial contains both of theoretical backgrounds and object-oriented implementation. Just pick any topic in which you are interested, and learn and run it!
 
 ## Contents
 
@@ -10,7 +10,7 @@ Every single topic is almost fully self-contained with both theoretical backgrou
 02. [PrioritizedExperienceReplay](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/03.per.ipynb)
 03. [DuelingNet](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/04.dueling.ipynb)
 04. [NoisyNet](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/05.noisy_net.ipynb)
-05. C51
+05. [CategoricalDQN](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/06.categorical_dqn.ipynb)
 06. N-step
 07. Rainbow
 08. Rainbow+DQfD
