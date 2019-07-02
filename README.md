@@ -1,7 +1,8 @@
-# Somewhere over the Rainbow, from Cartpole to Pong
+Do you want a nicely working RL agent on Atari?
+# Rainbow is all you need!
 
 Step-by-step tutorials from DQN to Rainbow.
-Every tutorial contains both of simple theoretical backgrounds and object-oriented implementation. Just pick any topic in which you are interested, and learn and run it!
+Every tutorial contains both of theoretical backgrounds and object-oriented implementation. Just pick any topic in which you are interested, and learn and run it!
 
 ## Contents
 
