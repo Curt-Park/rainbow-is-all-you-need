@@ -1,4 +1,6 @@
-Do you want a nicely working RL agent on Atari?
+##### Do you want a RL agent nicely moving on Atari?
+
+
 # Rainbow is all you need!
 
 Step-by-step tutorials from DQN to Rainbow.
