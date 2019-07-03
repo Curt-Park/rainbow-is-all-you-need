@@ -8,14 +8,14 @@ Every tutorial contains both of theoretical backgrounds and object-oriented impl
 
 ## Contents
 
-01. DQN [[NBViwer](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/01.dqn.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/01.dqn.ipynb)]
-02. [DoubleDQN](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/02.double_q.ipynb)
-03. [PrioritizedExperienceReplay](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/03.per.ipynb)
-04. [DuelingNet](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/04.dueling.ipynb)
-05. [NoisyNet](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/05.noisy_net.ipynb)
-06. [CategoricalDQN](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/06.categorical_dqn.ipynb)
-07. [N-stepLearning](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/07.n_step_learning.ipynb)
-08. [Rainbow](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/08.rainbow.ipynb)
+01. DQN [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/01.dqn.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/01.dqn.ipynb)]
+02. DoubleDQN [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/02.double_dqn.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/02.double_q.ipynb)]
+03. PrioritizedExperienceReplay [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/03.per.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/03.per.ipynb)]
+04. DuelingNet [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/04.dueling.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/04.dueling.ipynb)]
+05. NoisyNet [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/05.noisy_net.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/05.noisy_net.ipynb)]
+06. CategoricalDQN [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/06.categorical_dqn.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/06.categorical_dqn.ipynb)]
+07. N-stepLearning [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/07.n_step_learning.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/07.n_step_learning.ipynb)]
+08. Rainbow [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/2nd_dlcat_rainbow/blob/master/08.rainbow.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/08.rainbow.ipynb)]
 
 ## Prerequisites
 This repository is tested on [Anaconda](https://www.anaconda.com/distribution/) virtual environment with python 3.6.1+
