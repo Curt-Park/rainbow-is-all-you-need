@@ -1,9 +1,6 @@
 numpy==1.16.2
 torch==1.0.1
 gym
-gym[atari]
-box2d-py
 typing
-opencv-python
 matplotlib
 jupyter
