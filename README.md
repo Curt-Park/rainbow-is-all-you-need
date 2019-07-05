@@ -3,8 +3,8 @@
 *Do you want a RL agent nicely moving on Atari?*
 # Rainbow is all you need!
 
-Step-by-step tutorials from DQN to Rainbow.
-Every tutorial contains both of theoretical backgrounds and object-oriented implementation. Just pick any topic in which you are interested, and learn! You can execute them right away with Colab even on your smartphone.
+This is a step-by-step tutorial from DQN to Rainbow.
+Every chapter contains both of theoretical backgrounds and object-oriented implementation. Just pick any topic in which you are interested, and learn! You can execute them right away with Colab even on your smartphone.
 
 Please feel free to open an issue or a pull-request if you have any idea to make it better. :)
 
