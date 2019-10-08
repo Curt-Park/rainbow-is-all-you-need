@@ -8,6 +8,7 @@ Every chapter contains both of theoretical backgrounds and object-oriented imple
 
 Please feel free to open an issue or a pull-request if you have any idea to make it better. :)
 
+>If you want a tutorial for policy gradient methods, please see [PG is All You Need](https://github.com/MrSyee/pg-is-all-you-need).
 
 ## Contents
 
