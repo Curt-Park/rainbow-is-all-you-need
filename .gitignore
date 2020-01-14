@@ -103,5 +103,5 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-# JSAnimation
-None*.png
+# .mp4
+videos/
