@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Segment tree for Proirtized Replay Buffer."""
+"""Segment tree for Prioritized Replay Buffer."""
 
 import operator
 from typing import Callable
