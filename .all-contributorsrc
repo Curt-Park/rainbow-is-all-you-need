@@ -23,11 +23,21 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Wei",
+      "name": "Wei He",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/5880908?v=4",
+      "profile": "https://whe.me",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "projectName": "rainbow-is-all-you-need",
   "projectOwner": "Curt-Park",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
