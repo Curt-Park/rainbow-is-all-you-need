@@ -105,3 +105,6 @@ venv.bak/
 
 # .mp4
 videos/
+
+# images
+*.png
