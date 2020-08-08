@@ -1,4 +1,4 @@
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-green.svg?style=flat-square)](#contributors)
 
 *Do you want a RL agent nicely moving on Atari?*
 # Rainbow is all you need!
