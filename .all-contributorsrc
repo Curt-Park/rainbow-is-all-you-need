@@ -41,6 +41,15 @@
       "contributions": [
         "maintenance"
       ]
+    },
+    {
+      "login": "leeyaf",
+      "name": "leeyaf",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10635308?v=4",
+      "profile": "https://www.tun6.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
