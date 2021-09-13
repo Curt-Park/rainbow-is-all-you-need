@@ -50,6 +50,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "AFanaei",
+      "name": "ahmadF",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5231504?v=4",
+      "profile": "https://github.com/AFanaei",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
