@@ -28,15 +28,6 @@ $ conda create -n rainbow-is-all-you-need python=3.8
 $ conda activate rainbow-is-all-you-need
 ```
 
-For the execution of videos for agents, the following dependency is needed.
-```
-# for OS X
-$ brew install ffmpeg
-
-# for Ubuntu variants
-$ sudo apt-get install ffmpeg
-```
-
 ## Installation
 First, clone the repository.
 ```

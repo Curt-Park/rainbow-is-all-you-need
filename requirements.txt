@@ -1,5 +1,5 @@
-torch==1.9.0
+pytorch==1.9.0
 matplotlib==3.5.1
-pyglet==1.5.14
+pyglet==1.5.15
 gym==0.21.0
-jupyter
+jupyterlab==3.2.6
