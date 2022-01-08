@@ -7,3 +7,6 @@ dev:
 	jupyter contrib nbextension install --user
 	jupyter nbextensions_configurator enable --user
 	python3 -m ipykernel install --user
+
+clean:
+	 git clean -xdf
