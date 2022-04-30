@@ -22,22 +22,16 @@ Please feel free to open an issue or a pull-request if you have any idea to make
 08. Rainbow [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/rainbow-is-all-you-need/blob/master/08.rainbow.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/08.rainbow.ipynb)]
 
 ## Prerequisites
-This repository is tested on [Anaconda](https://www.anaconda.com/distribution/) virtual environment with python 3.8+
-```
-$ conda create -n rainbow-is-all-you-need python=3.8
-$ conda activate rainbow-is-all-you-need
-```
-
-## Installation
-First, clone the repository.
+This repository is tested with python 3.8+
 ```
 git clone https://github.com/Curt-Park/rainbow-is-all-you-need.git
 cd rainbow-is-all-you-need
+make setup
 ```
 
-Secondly, install packages required to execute the code. Just type:
+## How to Run
 ```
-make setup
+jupyter lab
 ```
 
 ## Related Papers
