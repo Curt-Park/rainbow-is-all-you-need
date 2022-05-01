@@ -1,5 +1,5 @@
 setup:
-	conda install --file requirements.txt
+	pip install -r requirements.txt
 
 clean:
 	git clean -xdf
