@@ -54,14 +54,17 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://www.linkedin.com/in/curt-park/"><img src="https://avatars3.githubusercontent.com/u/14961526?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jinwoo Park (Curt)</b></sub></a><br /><a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=Curt-Park" title="Code">💻</a> <a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=Curt-Park" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://www.linkedin.com/in/kyunghwan-kim-0739a314a/"><img src="https://avatars3.githubusercontent.com/u/17582508?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kyunghwan Kim</b></sub></a><br /><a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=MrSyee" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/Wei-1"><img src="https://avatars0.githubusercontent.com/u/10698262?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Wei Chen</b></sub></a><br /><a href="#maintenance-Wei-1" title="Maintenance">🚧</a></td>
-    <td align="center"><a href="https://github.com/wlbksy"><img src="https://avatars1.githubusercontent.com/u/2433806?v=4?s=100" width="100px;" alt=""/><br /><sub><b>WANG Lei</b></sub></a><br /><a href="#maintenance-wlbksy" title="Maintenance">🚧</a></td>
-    <td align="center"><a href="https://www.tun6.com/"><img src="https://avatars.githubusercontent.com/u/10635308?v=4?s=100" width="100px;" alt=""/><br /><sub><b>leeyaf</b></sub></a><br /><a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=leeyaf" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/AFanaei"><img src="https://avatars.githubusercontent.com/u/5231504?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ahmadF</b></sub></a><br /><a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=AFanaei" title="Documentation">📖</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/curt-park/"><img src="https://avatars3.githubusercontent.com/u/14961526?v=4?s=100" width="100px;" alt="Jinwoo Park (Curt)"/><br /><sub><b>Jinwoo Park (Curt)</b></sub></a><br /><a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=Curt-Park" title="Code">💻</a> <a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=Curt-Park" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/kyunghwan-kim-0739a314a/"><img src="https://avatars3.githubusercontent.com/u/17582508?v=4?s=100" width="100px;" alt="Kyunghwan Kim"/><br /><sub><b>Kyunghwan Kim</b></sub></a><br /><a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=MrSyee" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Wei-1"><img src="https://avatars0.githubusercontent.com/u/10698262?v=4?s=100" width="100px;" alt="Wei Chen"/><br /><sub><b>Wei Chen</b></sub></a><br /><a href="#maintenance-Wei-1" title="Maintenance">🚧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/wlbksy"><img src="https://avatars1.githubusercontent.com/u/2433806?v=4?s=100" width="100px;" alt="WANG Lei"/><br /><sub><b>WANG Lei</b></sub></a><br /><a href="#maintenance-wlbksy" title="Maintenance">🚧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.tun6.com/"><img src="https://avatars.githubusercontent.com/u/10635308?v=4?s=100" width="100px;" alt="leeyaf"/><br /><sub><b>leeyaf</b></sub></a><br /><a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=leeyaf" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/AFanaei"><img src="https://avatars.githubusercontent.com/u/5231504?v=4?s=100" width="100px;" alt="ahmadF"/><br /><sub><b>ahmadF</b></sub></a><br /><a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=AFanaei" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/robertoschiavone"><img src="https://avatars.githubusercontent.com/u/5054879?v=4?s=100" width="100px;" alt="Roberto Schiavone"/><br /><sub><b>Roberto Schiavone</b></sub></a><br /><a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=robertoschiavone" title="Code">💻</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->

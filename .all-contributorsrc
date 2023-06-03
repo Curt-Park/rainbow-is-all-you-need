@@ -59,6 +59,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "robertoschiavone",
+      "name": "Roberto Schiavone",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5054879?v=4",
+      "profile": "https://github.com/robertoschiavone",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -66,5 +75,7 @@
   "projectOwner": "Curt-Park",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitType": "docs",
+  "commitConvention": "angular"
 }
