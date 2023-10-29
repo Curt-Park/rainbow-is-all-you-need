@@ -66,6 +66,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/DaivdYuan"><img src="https://avatars.githubusercontent.com/u/47169162?v=4?s=100" width="100px;" alt="David Yuan"/><br /><sub><b>David Yuan</b></sub></a><br /><a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=DaivdYuan" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/dhanushka2001"><img src="https://avatars.githubusercontent.com/u/79731347?v=4?s=100" width="100px;" alt="dhanushka2001"/><br /><sub><b>dhanushka2001</b></sub></a><br /><a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=dhanushka2001" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
