@@ -64,6 +64,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/AFanaei"><img src="https://avatars.githubusercontent.com/u/5231504?v=4?s=100" width="100px;" alt="ahmadF"/><br /><sub><b>ahmadF</b></sub></a><br /><a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=AFanaei" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/robertoschiavone"><img src="https://avatars.githubusercontent.com/u/5054879?v=4?s=100" width="100px;" alt="Roberto Schiavone"/><br /><sub><b>Roberto Schiavone</b></sub></a><br /><a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=robertoschiavone" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/DaivdYuan"><img src="https://avatars.githubusercontent.com/u/47169162?v=4?s=100" width="100px;" alt="David Yuan"/><br /><sub><b>David Yuan</b></sub></a><br /><a href="https://github.com/Curt-Park/rainbow-is-all-you-need/commits?author=DaivdYuan" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
