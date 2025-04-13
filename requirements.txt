@@ -3,5 +3,5 @@ matplotlib                      == 3.5.1
 pyglet                          == 1.5.15
 gymnasium[classic-control]      == 0.28.1
 PyVirtualDisplay                == 3.0
-jupyterlab                      == 3.6.7
+jupyterlab                      == 3.6.8
 moviepy                         == 1.0.3
