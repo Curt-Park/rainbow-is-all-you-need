@@ -1,4 +1,4 @@
-torch                           == 2.2.0
+torch                           == 2.6.0
 matplotlib                      == 3.5.1
 pyglet                          == 1.5.15
 gymnasium[classic-control]      == 0.28.1
