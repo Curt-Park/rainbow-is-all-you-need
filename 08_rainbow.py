@@ -116,7 +116,7 @@ def _(deque, np):
             self.next_obs_buf = np.zeros([size, obs_dim], dtype=np.float32)
             self.acts_buf = np.zeros([size], dtype=np.float32)
             self.rews_buf = np.zeros([size], dtype=np.float32)
-            self.done_buf = np.zeros(size, dtype=np.float32)
+            self.terminated_buf = np.zeros(size, dtype=np.float32)
             self.max_size, self.batch_size = size, batch_size
             (
                 self.ptr,
@@ -134,9 +134,9 @@ def _(deque, np):
             act: np.ndarray,
             rew: float,
             next_obs: np.ndarray,
-            done: bool,
+            terminated: bool,
         ) -> tuple[np.ndarray, np.ndarray, float, np.ndarray, bool]:
-            transition = (obs, act, rew, next_obs, done)
+            transition = (obs, act, rew, next_obs, terminated)
             self.n_step_buffer.append(transition)
 
             # single step transition is not ready
@@ -144,14 +144,14 @@ def _(deque, np):
                 return ()
 
             # make a n-step transition
-            rew, next_obs, done = self._get_n_step_info(self.n_step_buffer, self.gamma)
+            rew, next_obs, terminated = self._get_n_step_info(self.n_step_buffer, self.gamma)
             obs, act = self.n_step_buffer[0][:2]
 
             self.obs_buf[self.ptr] = obs
             self.next_obs_buf[self.ptr] = next_obs
             self.acts_buf[self.ptr] = act
             self.rews_buf[self.ptr] = rew
-            self.done_buf[self.ptr] = done
+            self.terminated_buf[self.ptr] = terminated
             self.ptr = (self.ptr + 1) % self.max_size
             self.size = min(self.size + 1, self.max_size)
 
@@ -165,7 +165,7 @@ def _(deque, np):
                 next_obs=self.next_obs_buf[idxs],
                 acts=self.acts_buf[idxs],
                 rews=self.rews_buf[idxs],
-                done=self.done_buf[idxs],
+                terminated=self.terminated_buf[idxs],
                 # for N-step Learning
                 indices=idxs,
             )
@@ -177,23 +177,23 @@ def _(deque, np):
                 next_obs=self.next_obs_buf[idxs],
                 acts=self.acts_buf[idxs],
                 rews=self.rews_buf[idxs],
-                done=self.done_buf[idxs],
+                terminated=self.terminated_buf[idxs],
             )
 
         def _get_n_step_info(
             self, n_step_buffer: deque, gamma: float
         ) -> tuple[np.int64, np.ndarray, bool]:
-            """Return n step rew, next_obs, and done."""
+            """Return n step rew, next_obs, and terminated."""
             # info of the last transition
-            rew, next_obs, done = n_step_buffer[-1][-3:]
+            rew, next_obs, terminated = n_step_buffer[-1][-3:]
 
             for transition in reversed(list(n_step_buffer)[:-1]):
                 r, n_o, d = transition[-3:]
 
                 rew = r + gamma * rew * (1 - d)
-                next_obs, done = (n_o, d) if d else (next_obs, done)
+                next_obs, terminated = (n_o, d) if d else (next_obs, terminated)
 
-            return rew, next_obs, done
+            return rew, next_obs, terminated
 
         def __len__(self) -> int:
             return self.size
@@ -355,10 +355,10 @@ def _(MinSegmentTree, ReplayBuffer, SumSegmentTree, np, random):
             act: int,
             rew: float,
             next_obs: np.ndarray,
-            done: bool,
+            terminated: bool,
         ) -> tuple[np.ndarray, np.ndarray, float, np.ndarray, bool]:
             """Store experience and priority."""
-            transition = super().store(obs, act, rew, next_obs, done)
+            transition = super().store(obs, act, rew, next_obs, terminated)
 
             if transition:
                 self.sum_tree[self.tree_ptr] = self.max_priority**self.alpha
@@ -378,7 +378,7 @@ def _(MinSegmentTree, ReplayBuffer, SumSegmentTree, np, random):
             next_obs = self.next_obs_buf[indices]
             acts = self.acts_buf[indices]
             rews = self.rews_buf[indices]
-            done = self.done_buf[indices]
+            terminated = self.terminated_buf[indices]
             weights = np.array([self._calculate_weight(i, beta) for i in indices])
 
             return dict(
@@ -386,7 +386,7 @@ def _(MinSegmentTree, ReplayBuffer, SumSegmentTree, np, random):
                 next_obs=next_obs,
                 acts=acts,
                 rews=rews,
-                done=done,
+                terminated=terminated,
                 weights=weights,
                 indices=indices,
             )
@@ -791,7 +791,7 @@ def _(
             done = terminated or truncated
 
             if not self.is_test:
-                self.transition += [reward, next_state, done]
+                self.transition += [reward, next_state, terminated]
 
                 # N-step transition
                 if self.use_n_step:
@@ -927,7 +927,7 @@ def _(
             next_state = torch.FloatTensor(samples["next_obs"]).to(device)
             action = torch.LongTensor(samples["acts"]).to(device)
             reward = torch.FloatTensor(samples["rews"].reshape(-1, 1)).to(device)
-            done = torch.FloatTensor(samples["done"].reshape(-1, 1)).to(device)
+            terminated = torch.FloatTensor(samples["terminated"].reshape(-1, 1)).to(device)
 
             # Categorical DQN algorithm
             delta_z = float(self.v_max - self.v_min) / (self.atom_size - 1)
@@ -938,7 +938,7 @@ def _(
                 next_dist = self.dqn_target.dist(next_state)
                 next_dist = next_dist[range(self.batch_size), next_action]
 
-                t_z = reward + (1 - done) * gamma * self.support
+                t_z = reward + (1 - terminated) * gamma * self.support
                 t_z = t_z.clamp(min=self.v_min, max=self.v_max)
                 b = (t_z - self.v_min) / delta_z
                 l = b.floor().long()

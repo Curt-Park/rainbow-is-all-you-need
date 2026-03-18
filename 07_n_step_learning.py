@@ -110,7 +110,7 @@ def _(deque, np):
             self.next_obs_buf = np.zeros([size, obs_dim], dtype=np.float32)
             self.acts_buf = np.zeros([size], dtype=np.float32)
             self.rews_buf = np.zeros([size], dtype=np.float32)
-            self.done_buf = np.zeros(size, dtype=np.float32)
+            self.terminated_buf = np.zeros(size, dtype=np.float32)
             self.max_size, self.batch_size = size, batch_size
             (
                 self.ptr,
@@ -123,9 +123,9 @@ def _(deque, np):
             self.gamma = gamma
 
         def store(
-            self, obs: np.ndarray, act: np.ndarray, rew: float, next_obs: np.ndarray, done: bool
+            self, obs: np.ndarray, act: np.ndarray, rew: float, next_obs: np.ndarray, terminated: bool
         ) -> tuple[np.ndarray, np.ndarray, float, np.ndarray, bool]:
-            transition = (obs, act, rew, next_obs, done)
+            transition = (obs, act, rew, next_obs, terminated)
             self.n_step_buffer.append(transition)
 
             # single step transition is not ready
@@ -133,14 +133,14 @@ def _(deque, np):
                 return ()
 
             # make a n-step transition
-            rew, next_obs, done = self._get_n_step_info(self.n_step_buffer, self.gamma)
+            rew, next_obs, terminated = self._get_n_step_info(self.n_step_buffer, self.gamma)
             obs, act = self.n_step_buffer[0][:2]
 
             self.obs_buf[self.ptr] = obs
             self.next_obs_buf[self.ptr] = next_obs
             self.acts_buf[self.ptr] = act
             self.rews_buf[self.ptr] = rew
-            self.done_buf[self.ptr] = done
+            self.terminated_buf[self.ptr] = terminated
             self.ptr = (self.ptr + 1) % self.max_size
             self.size = min(self.size + 1, self.max_size)
 
@@ -154,7 +154,7 @@ def _(deque, np):
                 next_obs=self.next_obs_buf[indices],
                 acts=self.acts_buf[indices],
                 rews=self.rews_buf[indices],
-                done=self.done_buf[indices],
+                terminated=self.terminated_buf[indices],
                 # for N-step Learning
                 indices=indices,
             )
@@ -166,23 +166,23 @@ def _(deque, np):
                 next_obs=self.next_obs_buf[indices],
                 acts=self.acts_buf[indices],
                 rews=self.rews_buf[indices],
-                done=self.done_buf[indices],
+                terminated=self.terminated_buf[indices],
             )
 
         def _get_n_step_info(
             self, n_step_buffer: deque, gamma: float
         ) -> tuple[np.int64, np.ndarray, bool]:
-            """Return n step rew, next_obs, and done."""
+            """Return n step rew, next_obs, and terminated."""
             # info of the last transition
-            rew, next_obs, done = n_step_buffer[-1][-3:]
+            rew, next_obs, terminated = n_step_buffer[-1][-3:]
 
             for transition in reversed(list(n_step_buffer)[:-1]):
                 r, n_o, d = transition[-3:]
 
                 rew = r + gamma * rew * (1 - d)
-                next_obs, done = (n_o, d) if d else (next_obs, done)
+                next_obs, terminated = (n_o, d) if d else (next_obs, terminated)
 
-            return rew, next_obs, done
+            return rew, next_obs, terminated
 
         def __len__(self) -> int:
             return self.size
@@ -378,7 +378,7 @@ def _(F, Network, ReplayBuffer, gym, mo, np, optim, plt, torch, warnings):
             done = terminated or truncated
 
             if not self.is_test:
-                self.transition += [reward, next_state, done]
+                self.transition += [reward, next_state, terminated]
 
                 # N-step transition
                 if self.use_n_step:
@@ -496,13 +496,13 @@ def _(F, Network, ReplayBuffer, gym, mo, np, optim, plt, torch, warnings):
             next_state = torch.FloatTensor(samples["next_obs"]).to(device)
             action = torch.LongTensor(samples["acts"].reshape(-1, 1)).to(device)
             reward = torch.FloatTensor(samples["rews"].reshape(-1, 1)).to(device)
-            done = torch.FloatTensor(samples["done"].reshape(-1, 1)).to(device)
+            terminated = torch.FloatTensor(samples["terminated"].reshape(-1, 1)).to(device)
 
             # G_t   = r + gamma * v(s_{t+1})  if state != Terminal
             #       = r                       otherwise
             curr_q_value = self.dqn(state).gather(1, action)
             next_q_value = self.dqn_target(next_state).max(dim=1, keepdim=True)[0].detach()
-            mask = 1 - done
+            mask = 1 - terminated
             target = (reward + gamma * next_q_value * mask).to(self.device)
 
             # calculate dqn loss
