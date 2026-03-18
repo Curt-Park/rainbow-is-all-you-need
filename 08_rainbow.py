@@ -512,7 +512,8 @@ def _(F, math, nn, torch):
         def forward(self, x: torch.Tensor) -> torch.Tensor:
             """Forward method implementation.
 
-            In eval mode, use only the mean weights (no noise) for greedy action selection.
+            In eval mode, use only the mean weights (no noise) for
+            deterministic action selection, following Google Dopamine.
             """
             if self.training:
                 return F.linear(
@@ -778,10 +779,9 @@ def _(
         def select_action(self, state: np.ndarray) -> np.ndarray:
             """Select an action from the input state."""
             # NoisyNet: no epsilon greedy action selection
-            # Use eval mode during test to disable noise
+            # Disable noise during test for deterministic evaluation
             if self.is_test:
                 self.dqn.eval()
-
             selected_action = self.dqn(torch.FloatTensor(state).to(self.device)).argmax()
             selected_action = selected_action.detach().cpu().numpy()
 
@@ -922,6 +922,7 @@ def _(
 
             # reset
             self.env = naive_env
+            self.dqn.train()
 
             return score
 
