@@ -79,17 +79,7 @@ def _():
     import torch.nn.functional as F
     import torch.optim as optim
 
-    return (
-        F,
-        gym,
-        math,
-        nn,
-        np,
-        optim,
-        os,
-        plt,
-        torch,
-    )
+    return F, gym, math, nn, np, optim, os, plt, torch, warnings
 
 
 @app.cell(hide_code=True)
@@ -299,17 +289,7 @@ def _(mo):
 
 
 @app.cell
-def _(
-    F,
-    Network,
-    ReplayBuffer,
-    gym,
-    mo,
-    np,
-    optim,
-    plt,
-    torch,
-):
+def _(F, Network, ReplayBuffer, gym, mo, np, optim, plt, torch, warnings):
     class DQNAgent:
         """DQN Agent interacting with environment.
 
@@ -637,6 +617,7 @@ def _(mo, os, video_folder):
 
     latest_file = show_latest_video(video_folder=video_folder)
     mo.output.replace(mo.video(src=open(latest_file, "rb").read()))
+    return
 
 
 if __name__ == "__main__":

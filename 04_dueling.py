@@ -77,17 +77,7 @@ def _():
     import torch.optim as optim
     from torch.nn.utils import clip_grad_norm_
 
-    return (
-        F,
-        clip_grad_norm_,
-        gym,
-        nn,
-        np,
-        optim,
-        os,
-        plt,
-        torch,
-    )
+    return F, clip_grad_norm_, gym, nn, np, optim, os, plt, torch, warnings
 
 
 @app.cell(hide_code=True)
@@ -236,6 +226,7 @@ def _(
     optim,
     plt,
     torch,
+    warnings,
 ):
     class DQNAgent:
         """DQN Agent interacting with environment.
@@ -590,6 +581,7 @@ def _(mo, os, video_folder):
 
     latest_file = show_latest_video(video_folder=video_folder)
     mo.output.replace(mo.video(src=open(latest_file, "rb").read()))
+    return
 
 
 if __name__ == "__main__":
