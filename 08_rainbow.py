@@ -407,7 +407,7 @@ def _(MinSegmentTree, ReplayBuffer, SumSegmentTree, np, random):
         def _sample_proportional(self) -> list[int]:
             """Sample indices based on proportions."""
             indices = []
-            p_total = self.sum_tree.sum(0, len(self) - 1)
+            p_total = self.sum_tree.sum(0, len(self))
             segment = p_total / self.batch_size
 
             for i in range(self.batch_size):
@@ -498,7 +498,7 @@ def _(F, math, nn, torch):
             self.weight_mu.data.uniform_(-mu_range, mu_range)
             self.weight_sigma.data.fill_(self.std_init / math.sqrt(self.in_features))
             self.bias_mu.data.uniform_(-mu_range, mu_range)
-            self.bias_sigma.data.fill_(self.std_init / math.sqrt(self.out_features))
+            self.bias_sigma.data.fill_(self.std_init / math.sqrt(self.in_features))
 
         def reset_noise(self):
             """Make new noise."""

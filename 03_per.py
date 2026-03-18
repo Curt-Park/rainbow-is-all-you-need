@@ -330,7 +330,7 @@ def _(MinSegmentTree, ReplayBuffer, SumSegmentTree, np, random):
         def _sample_proportional(self) -> list[int]:
             """Sample indices based on proportions."""
             indices = []
-            p_total = self.sum_tree.sum(0, len(self) - 1)
+            p_total = self.sum_tree.sum(0, len(self))
             segment = p_total / self.batch_size
 
             for i in range(self.batch_size):
