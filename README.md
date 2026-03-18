@@ -1,7 +1,10 @@
+<div align="center">
+
+<img src="assets/banner.svg" alt="Rainbow is All You Need" width="800"/>
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors)
 
-*Do you want a RL agent nicely moving on Atari?*
-# Rainbow is all you need!
+</div>
 
 This is a step-by-step tutorial from DQN to Rainbow.
 Every chapter contains both of theoretical backgrounds and object-oriented implementation. Just pick any topic in which you are interested, and learn! You can run them directly in the cloud with [molab](https://molab.marimo.io/) — no local setup needed.

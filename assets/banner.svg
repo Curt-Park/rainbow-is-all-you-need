@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" width="800" height="280">
+  <defs>
+    <linearGradient id="rainbow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF0000"/>
+      <stop offset="16%" stop-color="#FF8800"/>
+      <stop offset="33%" stop-color="#FFDD00"/>
+      <stop offset="50%" stop-color="#00CC44"/>
+      <stop offset="66%" stop-color="#0088FF"/>
+      <stop offset="83%" stop-color="#4400FF"/>
+      <stop offset="100%" stop-color="#8800CC"/>
+    </linearGradient>
+    <linearGradient id="rainbowArc" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF0000"/>
+      <stop offset="16%" stop-color="#FF8800"/>
+      <stop offset="33%" stop-color="#FFDD00"/>
+      <stop offset="50%" stop-color="#00CC44"/>
+      <stop offset="66%" stop-color="#0088FF"/>
+      <stop offset="83%" stop-color="#4400FF"/>
+      <stop offset="100%" stop-color="#8800CC"/>
+    </linearGradient>
+    <clipPath id="upperHalf">
+      <rect x="0" y="0" width="800" height="160"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="280" rx="12" fill="#0d1117"/>
+
+  <!-- Rainbow arcs -->
+  <g clip-path="url(#upperHalf)">
+    <ellipse cx="400" cy="160" rx="360" ry="140" fill="none" stroke="#FF0000" stroke-width="8" opacity="0.6"/>
+    <ellipse cx="400" cy="160" rx="340" ry="128" fill="none" stroke="#FF8800" stroke-width="8" opacity="0.6"/>
+    <ellipse cx="400" cy="160" rx="320" ry="116" fill="none" stroke="#FFDD00" stroke-width="8" opacity="0.6"/>
+    <ellipse cx="400" cy="160" rx="300" ry="104" fill="none" stroke="#00CC44" stroke-width="8" opacity="0.6"/>
+    <ellipse cx="400" cy="160" rx="280" ry="92" fill="none" stroke="#0088FF" stroke-width="8" opacity="0.6"/>
+    <ellipse cx="400" cy="160" rx="260" ry="80" fill="none" stroke="#4400FF" stroke-width="8" opacity="0.6"/>
+    <ellipse cx="400" cy="160" rx="240" ry="68" fill="none" stroke="#8800CC" stroke-width="8" opacity="0.6"/>
+  </g>
+
+  <!-- Title text -->
+  <text x="400" y="135" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="48" font-weight="bold" fill="url(#rainbow)">
+    Rainbow is All You Need
+  </text>
+
+  <!-- Subtitle -->
+  <text x="400" y="175" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#8b949e">
+    A step-by-step tutorial from DQN to Rainbow
+  </text>
+
+  <!-- Divider line with rainbow gradient -->
+  <rect x="200" y="195" width="400" height="2" rx="1" fill="url(#rainbow)" opacity="0.5"/>
+
+  <!-- Tags -->
+  <text x="400" y="228" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#58a6ff" letter-spacing="3">
+    DQN  ·  Double DQN  ·  PER  ·  Dueling  ·  NoisyNet  ·  C51  ·  N-step  ·  IQN
+  </text>
+
+  <!-- Bottom tagline -->
+  <text x="400" y="258" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#6e7681">
+    Theory + implementation in every chapter — pick a topic and learn!
+  </text>
+</svg>
