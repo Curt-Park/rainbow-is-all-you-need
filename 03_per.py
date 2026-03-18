@@ -725,7 +725,7 @@ def _(mo, os, video_folder):
         return latest_file
 
     latest_file = show_latest_video(video_folder=video_folder)
-    mo.output.replace(mo.video(open(latest_file, "rb").read(), mimetype="video/mp4"))
+    mo.output.replace(mo.video(src=open(latest_file, "rb").read()))
 
 
 if __name__ == "__main__":
