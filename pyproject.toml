@@ -1,0 +1,33 @@
+[project]
+name = "rainbow-is-all-you-need"
+version = "0.1.0"
+description = "A step-by-step tutorial from DQN to Rainbow"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "gymnasium[classic-control]>=0.28.1",
+    "marimo>=0.21.0",
+    "matplotlib>=3.5.1",
+    "moviepy>=1.0.3",
+    "numpy",
+    "torch>=2.7.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "W",   # pycodestyle warnings
+]
+ignore = [
+    "E501",  # line too long (handled by formatter for code; prose in mo.md() is exempt)
+    "E741",  # ambiguous variable name (l/u are standard notation from the Categorical DQN paper)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["segment_tree"]
