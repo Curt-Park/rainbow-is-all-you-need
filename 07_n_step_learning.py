@@ -54,7 +54,6 @@ def _(mo):
 def _():
     import os
     from collections import deque
-    from typing import Deque, Dict, List, Tuple
 
     import gymnasium as gym
     import matplotlib.pyplot as plt
@@ -65,11 +64,7 @@ def _():
     import torch.optim as optim
 
     return (
-        Deque,
-        Dict,
         F,
-        List,
-        Tuple,
         deque,
         gym,
         nn,
@@ -108,7 +103,7 @@ def _(mo):
 
 
 @app.cell
-def _(Deque, Dict, Tuple, deque, np):
+def _(deque, np):
     class ReplayBuffer:
         """A simple numpy replay buffer."""
 
@@ -138,7 +133,7 @@ def _(Deque, Dict, Tuple, deque, np):
 
         def store(
             self, obs: np.ndarray, act: np.ndarray, rew: float, next_obs: np.ndarray, done: bool
-        ) -> Tuple[np.ndarray, np.ndarray, float, np.ndarray, bool]:
+        ) -> tuple[np.ndarray, np.ndarray, float, np.ndarray, bool]:
             transition = (obs, act, rew, next_obs, done)
             self.n_step_buffer.append(transition)
 
@@ -160,7 +155,7 @@ def _(Deque, Dict, Tuple, deque, np):
 
             return self.n_step_buffer[0]
 
-        def sample_batch(self) -> Dict[str, np.ndarray]:
+        def sample_batch(self) -> dict[str, np.ndarray]:
             indices = np.random.choice(self.size, size=self.batch_size, replace=False)
 
             return dict(
@@ -173,7 +168,7 @@ def _(Deque, Dict, Tuple, deque, np):
                 indices=indices,
             )
 
-        def sample_batch_from_idxs(self, indices: np.ndarray) -> Dict[str, np.ndarray]:
+        def sample_batch_from_idxs(self, indices: np.ndarray) -> dict[str, np.ndarray]:
             # for N-step Learning
             return dict(
                 obs=self.obs_buf[indices],
@@ -184,8 +179,8 @@ def _(Deque, Dict, Tuple, deque, np):
             )
 
         def _get_n_step_info(
-            self, n_step_buffer: Deque, gamma: float
-        ) -> Tuple[np.int64, np.ndarray, bool]:
+            self, n_step_buffer: deque, gamma: float
+        ) -> tuple[np.int64, np.ndarray, bool]:
             """Return n step rew, next_obs, and done."""
             # info of the last transition
             rew, next_obs, done = n_step_buffer[-1][-3:]
@@ -278,12 +273,9 @@ def _(mo):
 
 @app.cell
 def _(
-    Dict,
     F,
-    List,
     Network,
     ReplayBuffer,
-    Tuple,
     gym,
     np,
     optim,
@@ -398,7 +390,7 @@ def _(
 
             return selected_action
 
-        def step(self, action: np.ndarray) -> Tuple[np.ndarray, np.float64, bool]:
+        def step(self, action: np.ndarray) -> tuple[np.ndarray, np.float64, bool]:
             """Take an action and return the response of the env."""
             next_state, reward, terminated, truncated, _ = self.env.step(action)
             done = terminated or truncated
@@ -512,7 +504,7 @@ def _(
             # reset
             self.env = naive_env
 
-        def _compute_dqn_loss(self, samples: Dict[str, np.ndarray], gamma: float) -> torch.Tensor:
+        def _compute_dqn_loss(self, samples: dict[str, np.ndarray], gamma: float) -> torch.Tensor:
             """Return dqn loss."""
             device = self.device  # for shortening the following lines
             state = torch.FloatTensor(samples["obs"]).to(device)
@@ -540,9 +532,9 @@ def _(
         def _plot(
             self,
             frame_idx: int,
-            scores: List[float],
-            losses: List[float],
-            epsilons: List[float],
+            scores: list[float],
+            losses: list[float],
+            epsilons: list[float],
         ):
             """Plot the training progresses."""
             plt.close("all")

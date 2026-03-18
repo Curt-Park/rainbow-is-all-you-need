@@ -69,7 +69,6 @@ def _(mo):
 def _():
     import math
     import os
-    from typing import Dict, List, Tuple
 
     import gymnasium as gym
     import matplotlib.pyplot as plt
@@ -80,10 +79,7 @@ def _():
     import torch.optim as optim
 
     return (
-        Dict,
         F,
-        List,
-        Tuple,
         gym,
         math,
         nn,
@@ -106,7 +102,7 @@ def _(mo):
 
 
 @app.cell
-def _(Dict, np):
+def _(np):
     class ReplayBuffer:
         """A simple numpy replay buffer."""
 
@@ -138,7 +134,7 @@ def _(Dict, np):
             self.ptr = (self.ptr + 1) % self.max_size
             self.size = min(self.size + 1, self.max_size)
 
-        def sample_batch(self) -> Dict[str, np.ndarray]:
+        def sample_batch(self) -> dict[str, np.ndarray]:
             idxs = np.random.choice(self.size, size=self.batch_size, replace=False)
             return dict(
                 obs=self.obs_buf[idxs],
@@ -303,12 +299,9 @@ def _(mo):
 
 @app.cell
 def _(
-    Dict,
     F,
-    List,
     Network,
     ReplayBuffer,
-    Tuple,
     gym,
     np,
     optim,
@@ -390,7 +383,7 @@ def _(
 
             return selected_action
 
-        def step(self, action: np.ndarray) -> Tuple[np.ndarray, np.float64, bool]:
+        def step(self, action: np.ndarray) -> tuple[np.ndarray, np.float64, bool]:
             """Take an action and return the response of the env."""
             next_state, reward, terminated, truncated, _ = self.env.step(action)
             done = terminated or truncated
@@ -483,7 +476,7 @@ def _(
             # reset
             self.env = naive_env
 
-        def _compute_dqn_loss(self, samples: Dict[str, np.ndarray]) -> torch.Tensor:
+        def _compute_dqn_loss(self, samples: dict[str, np.ndarray]) -> torch.Tensor:
             """Return dqn loss."""
             device = self.device  # for shortening the following lines
             state = torch.FloatTensor(samples["obs"]).to(device)
@@ -511,8 +504,8 @@ def _(
         def _plot(
             self,
             frame_idx: int,
-            scores: List[float],
-            losses: List[float],
+            scores: list[float],
+            losses: list[float],
         ):
             """Plot the training progresses."""
             plt.close("all")
