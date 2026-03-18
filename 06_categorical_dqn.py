@@ -36,8 +36,7 @@ def _(mo):
     it towards zero according to the discount, and shifting it by the reward (or distribution of rewards, in the stochastic case). A distributional variant of Q-learning is then derived by first constructing a new support for the target distribution, and then minimizing the Kullbeck-Leibler divergence between the distribution $d_t$ and the target distribution
 
     $$
-    d_t' = (R_{t+1} + \gamma_{t+1} z, p_\hat{{\theta}} (S_{t+1}, \hat{a}^{*}_{t+1})),\\
-    D_{KL} (\phi_z d_t' \| d_t).
+    d_t' = (R_{t+1} + \gamma_{t+1} z, p_{\hat{\theta}} (S_{t+1}, \hat{a}^{*}_{t+1})), D_{KL} (\phi_z d_t' \| d_t).
     $$
 
     Here $\phi_z$ is a L2-projection of the target distribution onto the fixed support $z$, and $\hat{a}^*_{t+1} = \arg\max_{a} q_{\hat{\theta}} (S_{t+1}, a)$ is the greedy action with respect to the mean action values $q_{\hat{\theta}} (S_{t+1}, a) = z^{T}p_{\theta}(S_{t+1}, a)$ in state $S_{t+1}$.
@@ -163,13 +162,17 @@ def _(F, nn, torch):
 
             return q
 
+        def _logits(self, x: torch.Tensor) -> torch.Tensor:
+            """Get raw logits for atom distributions."""
+            return self.layers(x).view(-1, self.out_dim, self.atom_size)
+
         def dist(self, x: torch.Tensor) -> torch.Tensor:
             """Get distribution for atoms."""
-            q_atoms = self.layers(x).view(-1, self.out_dim, self.atom_size)
-            dist = F.softmax(q_atoms, dim=-1)
-            dist = dist.clamp(min=1e-3)  # for avoiding nans
+            return F.softmax(self._logits(x), dim=-1)
 
-            return dist
+        def log_dist(self, x: torch.Tensor) -> torch.Tensor:
+            """Get log-distribution for atoms (numerically stable)."""
+            return F.log_softmax(self._logits(x), dim=-1)
 
     return (Network,)
 
@@ -450,8 +453,8 @@ def _(Network, ReplayBuffer, gym, mo, np, optim, plt, torch, warnings):
                     (next_dist * (b - l.float())).view(-1),
                 )
 
-            dist = self.dqn.dist(state)
-            log_p = torch.log(dist[range(self.batch_size), action])
+            log_dist = self.dqn.log_dist(state)
+            log_p = log_dist[range(self.batch_size), action]
 
             loss = -(proj_dist * log_p).sum(1).mean()
 
@@ -537,7 +540,7 @@ def _(mo):
 @app.cell
 def _(DQNAgent, env, seed):
     # parameters
-    num_frames = 10000
+    num_frames = 20000
     memory_size = 10000
     batch_size = 32
     target_update = 150

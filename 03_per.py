@@ -330,7 +330,7 @@ def _(MinSegmentTree, ReplayBuffer, SumSegmentTree, np, random):
         def _sample_proportional(self) -> list[int]:
             """Sample indices based on proportions."""
             indices = []
-            p_total = self.sum_tree.sum(0, len(self) - 1)
+            p_total = self.sum_tree.sum(0, len(self))
             segment = p_total / self.batch_size
 
             for i in range(self.batch_size):
@@ -761,7 +761,7 @@ def _(mo):
 @app.cell
 def _(DQNAgent, env, seed):
     # parameters
-    num_frames = 10000
+    num_frames = 20000
     memory_size = 10000
     batch_size = 32
     target_update = 150
