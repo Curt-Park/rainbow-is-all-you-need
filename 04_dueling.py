@@ -100,7 +100,7 @@ def _(np):
             self.next_obs_buf = np.zeros([size, obs_dim], dtype=np.float32)
             self.acts_buf = np.zeros([size], dtype=np.float32)
             self.rews_buf = np.zeros([size], dtype=np.float32)
-            self.done_buf = np.zeros(size, dtype=np.float32)
+            self.terminated_buf = np.zeros(size, dtype=np.float32)
             self.max_size, self.batch_size = size, batch_size
             (
                 self.ptr,
@@ -113,13 +113,13 @@ def _(np):
             act: np.ndarray,
             rew: float,
             next_obs: np.ndarray,
-            done: bool,
+            terminated: bool,
         ):
             self.obs_buf[self.ptr] = obs
             self.next_obs_buf[self.ptr] = next_obs
             self.acts_buf[self.ptr] = act
             self.rews_buf[self.ptr] = rew
-            self.done_buf[self.ptr] = done
+            self.terminated_buf[self.ptr] = terminated
             self.ptr = (self.ptr + 1) % self.max_size
             self.size = min(self.size + 1, self.max_size)
 
@@ -130,7 +130,7 @@ def _(np):
                 next_obs=self.next_obs_buf[idxs],
                 acts=self.acts_buf[idxs],
                 rews=self.rews_buf[idxs],
-                done=self.done_buf[idxs],
+                terminated=self.terminated_buf[idxs],
             )
 
         def __len__(self) -> int:
@@ -326,7 +326,7 @@ def _(
             done = terminated or truncated
 
             if not self.is_test:
-                self.transition += [reward, next_state, done]
+                self.transition += [reward, next_state, terminated]
                 self.memory.store(*self.transition)
 
             return next_state, reward, done
@@ -427,13 +427,13 @@ def _(
             next_state = torch.FloatTensor(samples["next_obs"]).to(device)
             action = torch.LongTensor(samples["acts"].reshape(-1, 1)).to(device)
             reward = torch.FloatTensor(samples["rews"].reshape(-1, 1)).to(device)
-            done = torch.FloatTensor(samples["done"].reshape(-1, 1)).to(device)
+            terminated = torch.FloatTensor(samples["terminated"].reshape(-1, 1)).to(device)
 
             # G_t   = r + gamma * v(s_{t+1})  if state != Terminal
             #       = r                       otherwise
             curr_q_value = self.dqn(state).gather(1, action)
             next_q_value = self.dqn_target(next_state).max(dim=1, keepdim=True)[0].detach()
-            mask = 1 - done
+            mask = 1 - terminated
             target = (reward + self.gamma * next_q_value * mask).to(self.device)
 
             # calculate dqn loss
