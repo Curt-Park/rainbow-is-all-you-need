@@ -4,7 +4,9 @@
 # Rainbow is all you need!
 
 This is a step-by-step tutorial from DQN to Rainbow.
-Every chapter contains both of theoretical backgrounds and object-oriented implementation. Just pick any topic in which you are interested, and learn! You can execute them right away with Colab even on your smartphone.
+Every chapter contains both of theoretical backgrounds and object-oriented implementation. Just pick any topic in which you are interested, and learn! You can run them directly in the cloud with [molab](https://molab.marimo.io/) — no local setup needed.
+
+Built with [marimo](https://marimo.io/) — a reactive Python notebook that runs as a pure `.py` file with better reproducibility, git diffs, and interactive UI.
 
 Please feel free to open an issue or a pull-request if you have any idea to make it better. :)
 
@@ -12,26 +14,48 @@ Please feel free to open an issue or a pull-request if you have any idea to make
 
 ## Contents
 
-01. DQN [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/rainbow-is-all-you-need/blob/master/01.dqn.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/01.dqn.ipynb)]
-02. DoubleDQN [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/rainbow-is-all-you-need/blob/master/02.double_q.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/02.double_q.ipynb)]
-03. PrioritizedExperienceReplay [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/rainbow-is-all-you-need/blob/master/03.per.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/03.per.ipynb)]
-04. DuelingNet [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/rainbow-is-all-you-need/blob/master/04.dueling.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/04.dueling.ipynb)]
-05. NoisyNet [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/rainbow-is-all-you-need/blob/master/05.noisy_net.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/05.noisy_net.ipynb)]
-06. CategoricalDQN [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/rainbow-is-all-you-need/blob/master/06.categorical_dqn.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/06.categorical_dqn.ipynb)]
-07. N-stepLearning [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/rainbow-is-all-you-need/blob/master/07.n_step_learning.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/07.n_step_learning.ipynb)]
-08. Rainbow [[NBViewer](https://nbviewer.jupyter.org/github/Curt-Park/rainbow-is-all-you-need/blob/master/08.rainbow.ipynb)] [[Colab](https://colab.research.google.com/github/Curt-Park/rainbow-is-all-you-need/blob/master/08.rainbow.ipynb)]
+01. DQN [[GitHub](01_dqn.py)] [[Preview](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/01_dqn.py)] [[Interactive](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/01_dqn.py/wasm)]
+02. DoubleDQN [[GitHub](02_double_q.py)] [[Preview](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/02_double_q.py)] [[Interactive](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/02_double_q.py/wasm)]
+03. PrioritizedExperienceReplay [[GitHub](03_per.py)] [[Preview](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/03_per.py)] [[Interactive](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/03_per.py/wasm)]
+04. DuelingNet [[GitHub](04_dueling.py)] [[Preview](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/04_dueling.py)] [[Interactive](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/04_dueling.py/wasm)]
+05. NoisyNet [[GitHub](05_noisy_net.py)] [[Preview](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/05_noisy_net.py)] [[Interactive](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/05_noisy_net.py/wasm)]
+06. CategoricalDQN [[GitHub](06_categorical_dqn.py)] [[Preview](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/06_categorical_dqn.py)] [[Interactive](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/06_categorical_dqn.py/wasm)]
+07. N-stepLearning [[GitHub](07_n_step_learning.py)] [[Preview](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/07_n_step_learning.py)] [[Interactive](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/07_n_step_learning.py/wasm)]
+08. Rainbow [[GitHub](08_rainbow.py)] [[Preview](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/08_rainbow.py)] [[Interactive](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/08_rainbow.py/wasm)]
 
 ## Prerequisites
-This repository is tested with python 3.8+
-```
+
+```bash
+# Install mise
+curl https://mise.run | sh
+
+# Clone the project
 git clone https://github.com/Curt-Park/rainbow-is-all-you-need.git
 cd rainbow-is-all-you-need
+
+# Install Python + Create venv + Install Python packages
+make init
 make setup
 ```
 
 ## How to Run
+
+Run any notebook interactively in your browser:
 ```
-jupyter lab
+marimo edit 01_dqn.py
+```
+
+Or run as a script:
+```
+marimo run 01_dqn.py
+```
+
+## Development
+
+```
+make setup-dev # install the static analyzer as well
+make format    # run the formatter
+make lint      # run the linter
 ```
 
 ## Related Papers

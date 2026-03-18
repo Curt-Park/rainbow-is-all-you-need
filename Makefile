@@ -1,8 +1,17 @@
-setup:
-	pip install -r requirements.txt
+init:
+	mise trust && mise install
 
-conda:
-	python -m ipykernel install --user --name=rainbow-is-all-you-need
+setup:
+	uv sync --no-dev
+
+setup-dev:
+	uv sync
+
+lint:
+	uv run ruff check .
+
+format:
+	uv run ruff format .
 
 clean:
 	git clean -xdf

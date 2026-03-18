@@ -6,7 +6,7 @@ from typing import Callable
 
 
 class SegmentTree:
-    """ Create SegmentTree.
+    """Create SegmentTree.
 
     Taken from OpenAI baselines github repository:
     https://github.com/openai/baselines/blob/master/baselines/common/segment_tree.py
@@ -27,9 +27,9 @@ class SegmentTree:
             init_value (float)
 
         """
-        assert (
-            capacity > 0 and capacity & (capacity - 1) == 0
-        ), "capacity must be positive and a power of 2."
+        assert capacity > 0 and capacity & (capacity - 1) == 0, (
+            "capacity must be positive and a power of 2."
+        )
         self.capacity = capacity
         self.tree = [init_value for _ in range(2 * capacity)]
         self.operation = operation
@@ -78,7 +78,7 @@ class SegmentTree:
 
 
 class SumSegmentTree(SegmentTree):
-    """ Create SumSegmentTree.
+    """Create SumSegmentTree.
 
     Taken from OpenAI baselines github repository:
     https://github.com/openai/baselines/blob/master/baselines/common/segment_tree.py
@@ -119,7 +119,7 @@ class SumSegmentTree(SegmentTree):
 
 
 class MinSegmentTree(SegmentTree):
-    """ Create SegmentTree.
+    """Create SegmentTree.
 
     Taken from OpenAI baselines github repository:
     https://github.com/openai/baselines/blob/master/baselines/common/segment_tree.py
