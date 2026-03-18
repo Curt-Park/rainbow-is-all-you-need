@@ -70,12 +70,8 @@ def _():
     import torch.optim as optim
     from torch.nn.utils import clip_grad_norm_
 
-    from segment_tree import MinSegmentTree, SumSegmentTree
-
     return (
         F,
-        MinSegmentTree,
-        SumSegmentTree,
         clip_grad_norm_,
         deque,
         gym,
@@ -208,11 +204,109 @@ def _(deque, np):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    ## Prioritized replay Buffer
+    ## Segment Tree
 
-    `store` method returns boolean in order to inform if a N-step transition has been generated.
+    Same segment tree implementation used in *03_per.py*. See that notebook for a detailed explanation of the data structure.
 
-    (Please see *02.per.ipynb* for detailed description about PER.)
+    - **SegmentTree**: Base class supporting any associative binary operation with O(log n) updates and range queries.
+    - **SumSegmentTree**: Tracks cumulative priorities for proportional sampling.
+    - **MinSegmentTree**: Tracks minimum priority for importance-sampling weight normalization.
+    """)
+    return
+
+
+@app.cell
+def _():
+    import operator
+    from collections.abc import Callable
+
+    class SegmentTree:
+        """Create SegmentTree.
+
+        Taken from OpenAI baselines github repository:
+        https://github.com/openai/baselines/blob/master/baselines/common/segment_tree.py
+        """
+
+        def __init__(self, capacity: int, operation: Callable, init_value: float):
+            assert capacity > 0 and capacity & (capacity - 1) == 0, (
+                "capacity must be positive and a power of 2."
+            )
+            self.capacity = capacity
+            self.tree = [init_value for _ in range(2 * capacity)]
+            self.operation = operation
+
+        def _operate_helper(
+            self, start: int, end: int, node: int, node_start: int, node_end: int
+        ) -> float:
+            if start == node_start and end == node_end:
+                return self.tree[node]
+            mid = (node_start + node_end) // 2
+            if end <= mid:
+                return self._operate_helper(start, end, 2 * node, node_start, mid)
+            elif mid + 1 <= start:
+                return self._operate_helper(start, end, 2 * node + 1, mid + 1, node_end)
+            else:
+                return self.operation(
+                    self._operate_helper(start, mid, 2 * node, node_start, mid),
+                    self._operate_helper(mid + 1, end, 2 * node + 1, mid + 1, node_end),
+                )
+
+        def operate(self, start: int = 0, end: int = 0) -> float:
+            if end <= 0:
+                end += self.capacity
+            end -= 1
+            return self._operate_helper(start, end, 1, 0, self.capacity - 1)
+
+        def __setitem__(self, idx: int, val: float):
+            idx += self.capacity
+            self.tree[idx] = val
+            idx //= 2
+            while idx >= 1:
+                self.tree[idx] = self.operation(self.tree[2 * idx], self.tree[2 * idx + 1])
+                idx //= 2
+
+        def __getitem__(self, idx: int) -> float:
+            assert 0 <= idx < self.capacity
+            return self.tree[self.capacity + idx]
+
+    class SumSegmentTree(SegmentTree):
+        def __init__(self, capacity: int):
+            super().__init__(capacity=capacity, operation=operator.add, init_value=0.0)
+
+        def sum(self, start: int = 0, end: int = 0) -> float:
+            return super().operate(start, end)
+
+        def retrieve(self, upperbound: float) -> int:
+            assert 0 <= upperbound <= self.sum() + 1e-5, f"upperbound: {upperbound}"
+            idx = 1
+            while idx < self.capacity:
+                left = 2 * idx
+                right = left + 1
+                if self.tree[left] > upperbound:
+                    idx = 2 * idx
+                else:
+                    upperbound -= self.tree[left]
+                    idx = right
+            return idx - self.capacity
+
+    class MinSegmentTree(SegmentTree):
+        def __init__(self, capacity: int):
+            super().__init__(capacity=capacity, operation=min, init_value=float("inf"))
+
+        def min(self, start: int = 0, end: int = 0) -> float:
+            return super().operate(start, end)
+
+    return MinSegmentTree, SumSegmentTree
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## Prioritized Replay Buffer
+
+    Combines PER with N-step learning. The `store` method returns a tuple to indicate whether an N-step transition has been completed — only then is it added to the priority buffer.
+
+    (Please see *03_per.py* for detailed description about PER.)
     """)
     return
 

@@ -33,7 +33,7 @@
     },
     {
       "id": "vblA",
-      "code_hash": "fbfb11642832c2b4bc1d6cd66cc49403",
+      "code_hash": "d2b2cacf2ad3823df4ead2117bd89d6e",
       "outputs": [
         {
           "type": "data",
@@ -72,12 +72,12 @@
     },
     {
       "id": "PKri",
-      "code_hash": "f7116389d1e7fd26a81631415ab48589",
+      "code_hash": "61b6b92068aa324b5fc2156370b87e7f",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"prioritized-replay-buffer\">Prioritized replay Buffer</h2>\n<span class=\"paragraph\"><code>store</code> method returns boolean in order to inform if a N-step transition has been generated.</span>\n<span class=\"paragraph\">(Please see <em>02.per.ipynb</em> for detailed description about PER.)</span></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"segment-tree\">Segment Tree</h2>\n<span class=\"paragraph\">Same segment tree implementation used in <em>03_per.py</em>. See that notebook for a detailed explanation of the data structure.</span>\n<ul>\n<li><strong>SegmentTree</strong>: Base class supporting any associative binary operation with O(log n) updates and range queries.</li>\n<li><strong>SumSegmentTree</strong>: Tracks cumulative priorities for proportional sampling.</li>\n<li><strong>MinSegmentTree</strong>: Tracks minimum priority for importance-sampling weight normalization.</li>\n</ul></span>"
           }
         }
       ],
@@ -85,7 +85,7 @@
     },
     {
       "id": "Xref",
-      "code_hash": "cbd5515ea51544c23c132dc24972059b",
+      "code_hash": "a9995645ede96df1704e6bbfef07d78f",
       "outputs": [
         {
           "type": "data",
@@ -98,12 +98,12 @@
     },
     {
       "id": "SFPL",
-      "code_hash": "2ebc7eb0bf3db2bc68f5d8bf402dc260",
+      "code_hash": "25f720f6b65085a37260befc9cde1c01",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"noisy-layer\">Noisy Layer</h2>\n<span class=\"paragraph\">Please see <em>05_noisy_net.py</em> for detailed description.</span>\n<span class=\"paragraph\"><strong>References:</strong></span>\n<ul>\n<li><a href=\"https://github.com/higgsfield/RL-Adventure/blob/master/5.noisy%20dqn.ipynb\" rel=\"noopener noreferrer\" target=\"_blank\">https://github.com/higgsfield/RL-Adventure/blob/master/5.noisy%20dqn.ipynb</a></li>\n<li><a href=\"https://github.com/Kaixhin/Rainbow/blob/master/model.py\" rel=\"noopener noreferrer\" target=\"_blank\">https://github.com/Kaixhin/Rainbow/blob/master/model.py</a></li>\n</ul></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"prioritized-replay-buffer\">Prioritized Replay Buffer</h2>\n<span class=\"paragraph\">Combines PER with N-step learning. The <code>store</code> method returns a tuple to indicate whether an N-step transition has been completed \u2014 only then is it added to the priority buffer.</span>\n<span class=\"paragraph\">(Please see <em>03_per.py</em> for detailed description about PER.)</span></span>"
           }
         }
       ],
@@ -111,7 +111,7 @@
     },
     {
       "id": "BYtC",
-      "code_hash": "eb706f0c1fe729903949ee1dec2c3ab4",
+      "code_hash": "cbd5515ea51544c23c132dc24972059b",
       "outputs": [
         {
           "type": "data",
@@ -124,12 +124,12 @@
     },
     {
       "id": "RGSE",
-      "code_hash": "d75df4c4b41791d3f625bd589c03f803",
+      "code_hash": "2ebc7eb0bf3db2bc68f5d8bf402dc260",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"noisynet-duelingnet-categorical-dqn\">NoisyNet + DuelingNet + Categorical DQN</h2>\n<h4 id=\"noisynet-duelingnet\">NoisyNet + DuelingNet</h4>\n<span class=\"paragraph\">NoisyLinear is employed for the last two layers of advantage and value layers. The noise should be reset at evey update step.</span>\n<h4 id=\"duelingnet-categorical-dqn\">DuelingNet + Categorical DQN</h4>\n<span class=\"paragraph\">The dueling network architecture is adapted for use with return distributions. The network has a shared representation, which is then fed into a value stream with atom_size outputs, and into an advantage stream with atom_size \u00d7 out_dim outputs. For each atom, the value and advantage streams are aggregated, as in dueling DQN, and then passed through a softmax layer to obtain the normalized parametric distributions used to estimate the returns\u2019 distributions.</span>\n<div class=\"language-scdoc codehilite\"><pre><span></span><code>        advantage = self.advantage_layer(adv_hid).view(-1, self.out_dim, self.atom_size)\n        value = self.value_layer(val_hid).view(-1, 1, self.atom_size)\n        q_atoms = value + advantage - advantage.mean(dim=1, keepdim=True)\n\n        dist = F.softmax(q_atoms, dim=-1)\n</code></pre></div>\n<span class=\"paragraph\">(Please see <em>04_dueling.py</em>, <em>05_noisy_net.py</em>, <em>06_categorical_dqn.py</em> for detailed description of each component's network architecture.)</span></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"noisy-layer\">Noisy Layer</h2>\n<span class=\"paragraph\">Please see <em>05_noisy_net.py</em> for detailed description.</span>\n<span class=\"paragraph\"><strong>References:</strong></span>\n<ul>\n<li><a href=\"https://github.com/higgsfield/RL-Adventure/blob/master/5.noisy%20dqn.ipynb\" rel=\"noopener noreferrer\" target=\"_blank\">https://github.com/higgsfield/RL-Adventure/blob/master/5.noisy%20dqn.ipynb</a></li>\n<li><a href=\"https://github.com/Kaixhin/Rainbow/blob/master/model.py\" rel=\"noopener noreferrer\" target=\"_blank\">https://github.com/Kaixhin/Rainbow/blob/master/model.py</a></li>\n</ul></span>"
           }
         }
       ],
@@ -137,7 +137,7 @@
     },
     {
       "id": "Kclp",
-      "code_hash": "0f67a2ec963e32f5f749258202a3ca83",
+      "code_hash": "eb706f0c1fe729903949ee1dec2c3ab4",
       "outputs": [
         {
           "type": "data",
@@ -150,12 +150,12 @@
     },
     {
       "id": "emfo",
-      "code_hash": "ed3b105845b867dc8971db7cdae89897",
+      "code_hash": "d75df4c4b41791d3f625bd589c03f803",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"rainbow-agent\">Rainbow Agent</h2>\n<span class=\"paragraph\">Here is a summary of DQNAgent class.</span>\n<table>\n<thead>\n<tr>\n<th>Method</th>\n<th>Note</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>select_action</td>\n<td>select an action from the input state.</td>\n</tr>\n<tr>\n<td>step</td>\n<td>take an action and return the response of the env.</td>\n</tr>\n<tr>\n<td>compute_dqn_loss</td>\n<td>return dqn loss.</td>\n</tr>\n<tr>\n<td>update_model</td>\n<td>update the model by gradient descent.</td>\n</tr>\n<tr>\n<td>target_hard_update</td>\n<td>hard update from the local model to the target model.</td>\n</tr>\n<tr>\n<td>train</td>\n<td>train the agent during num_frames.</td>\n</tr>\n<tr>\n<td>test</td>\n<td>test the agent (1 episode).</td>\n</tr>\n<tr>\n<td>plot</td>\n<td>plot the training progresses.</td>\n</tr>\n</tbody>\n</table>\n<h4 id=\"categorical-dqn-double-dqn\">Categorical DQN + Double DQN</h4>\n<span class=\"paragraph\">The idea of Double Q-learning is to reduce overestimations by decomposing the max operation in the target into action selection and action evaluation. Here, we use <code>self.dqn</code> instead of <code>self.dqn_target</code> to obtain the target actions.</span>\n<div class=\"language-scdoc codehilite\"><pre><span></span><code>        # Categorical DQN + Double DQN\n        # target_dqn is used when we don&#39;t employ double DQN\n        next_action = self.dqn(next_state).argmax(1)\n        next_dist = self.dqn_target.dist(next_state)\n        next_dist = next_dist[range(self.batch_size), next_action]\n</code></pre></div></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"noisynet-duelingnet-categorical-dqn\">NoisyNet + DuelingNet + Categorical DQN</h2>\n<h4 id=\"noisynet-duelingnet\">NoisyNet + DuelingNet</h4>\n<span class=\"paragraph\">NoisyLinear is employed for the last two layers of advantage and value layers. The noise should be reset at evey update step.</span>\n<h4 id=\"duelingnet-categorical-dqn\">DuelingNet + Categorical DQN</h4>\n<span class=\"paragraph\">The dueling network architecture is adapted for use with return distributions. The network has a shared representation, which is then fed into a value stream with atom_size outputs, and into an advantage stream with atom_size \u00d7 out_dim outputs. For each atom, the value and advantage streams are aggregated, as in dueling DQN, and then passed through a softmax layer to obtain the normalized parametric distributions used to estimate the returns\u2019 distributions.</span>\n<div class=\"language-scdoc codehilite\"><pre><span></span><code>        advantage = self.advantage_layer(adv_hid).view(-1, self.out_dim, self.atom_size)\n        value = self.value_layer(val_hid).view(-1, 1, self.atom_size)\n        q_atoms = value + advantage - advantage.mean(dim=1, keepdim=True)\n\n        dist = F.softmax(q_atoms, dim=-1)\n</code></pre></div>\n<span class=\"paragraph\">(Please see <em>04_dueling.py</em>, <em>05_noisy_net.py</em>, <em>06_categorical_dqn.py</em> for detailed description of each component's network architecture.)</span></span>"
           }
         }
       ],
@@ -163,7 +163,7 @@
     },
     {
       "id": "Hstk",
-      "code_hash": "1eacceba3227762756923b5174745aaa",
+      "code_hash": "0f67a2ec963e32f5f749258202a3ca83",
       "outputs": [
         {
           "type": "data",
@@ -176,12 +176,12 @@
     },
     {
       "id": "nWHF",
-      "code_hash": "8271d7cf9b5b06d6baaaf03154350026",
+      "code_hash": "ed3b105845b867dc8971db7cdae89897",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"environment\">Environment</h2>\n<span class=\"paragraph\">You can see the <a href=\"https://github.com/Farama-Foundation/Gymnasium/blob/main/gymnasium/envs/classic_control/cartpole.py\" rel=\"noopener noreferrer\" target=\"_blank\">code</a> and <a href=\"https://github.com/Farama-Foundation/Gymnasium/blob/main/gymnasium/envs/classic_control/cartpole.py#L91\" rel=\"noopener noreferrer\" target=\"_blank\">configurations</a> of CartPole-v1 from Farama Gymnasium's repository.</span></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"rainbow-agent\">Rainbow Agent</h2>\n<span class=\"paragraph\">Here is a summary of DQNAgent class.</span>\n<table>\n<thead>\n<tr>\n<th>Method</th>\n<th>Note</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>select_action</td>\n<td>select an action from the input state.</td>\n</tr>\n<tr>\n<td>step</td>\n<td>take an action and return the response of the env.</td>\n</tr>\n<tr>\n<td>compute_dqn_loss</td>\n<td>return dqn loss.</td>\n</tr>\n<tr>\n<td>update_model</td>\n<td>update the model by gradient descent.</td>\n</tr>\n<tr>\n<td>target_hard_update</td>\n<td>hard update from the local model to the target model.</td>\n</tr>\n<tr>\n<td>train</td>\n<td>train the agent during num_frames.</td>\n</tr>\n<tr>\n<td>test</td>\n<td>test the agent (1 episode).</td>\n</tr>\n<tr>\n<td>plot</td>\n<td>plot the training progresses.</td>\n</tr>\n</tbody>\n</table>\n<h4 id=\"categorical-dqn-double-dqn\">Categorical DQN + Double DQN</h4>\n<span class=\"paragraph\">The idea of Double Q-learning is to reduce overestimations by decomposing the max operation in the target into action selection and action evaluation. Here, we use <code>self.dqn</code> instead of <code>self.dqn_target</code> to obtain the target actions.</span>\n<div class=\"language-scdoc codehilite\"><pre><span></span><code>        # Categorical DQN + Double DQN\n        # target_dqn is used when we don&#39;t employ double DQN\n        next_action = self.dqn(next_state).argmax(1)\n        next_dist = self.dqn_target.dist(next_state)\n        next_dist = next_dist[range(self.batch_size), next_action]\n</code></pre></div></span>"
           }
         }
       ],
@@ -189,7 +189,7 @@
     },
     {
       "id": "iLit",
-      "code_hash": "bf1bcf8a5dd37afb7bf2398827ccd207",
+      "code_hash": "1eacceba3227762756923b5174745aaa",
       "outputs": [
         {
           "type": "data",
@@ -202,12 +202,12 @@
     },
     {
       "id": "ZHCJ",
-      "code_hash": "7a2e0f803376c21d44bfd4cfde91a045",
+      "code_hash": "8271d7cf9b5b06d6baaaf03154350026",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"set-random-seed\">Set random seed</h2></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"environment\">Environment</h2>\n<span class=\"paragraph\">You can see the <a href=\"https://github.com/Farama-Foundation/Gymnasium/blob/main/gymnasium/envs/classic_control/cartpole.py\" rel=\"noopener noreferrer\" target=\"_blank\">code</a> and <a href=\"https://github.com/Farama-Foundation/Gymnasium/blob/main/gymnasium/envs/classic_control/cartpole.py#L91\" rel=\"noopener noreferrer\" target=\"_blank\">configurations</a> of CartPole-v1 from Farama Gymnasium's repository.</span></span>"
           }
         }
       ],
@@ -215,7 +215,7 @@
     },
     {
       "id": "ROlb",
-      "code_hash": "33ed3ef72498eb14131f08ba3fdb9ece",
+      "code_hash": "bf1bcf8a5dd37afb7bf2398827ccd207",
       "outputs": [
         {
           "type": "data",
@@ -228,6 +228,32 @@
     },
     {
       "id": "qnkX",
+      "code_hash": "7a2e0f803376c21d44bfd4cfde91a045",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"set-random-seed\">Set random seed</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TqIu",
+      "code_hash": "33ed3ef72498eb14131f08ba3fdb9ece",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Vxnm",
       "code_hash": "0ea72d4892d7e4c5ae466e7755e3839a",
       "outputs": [
         {
@@ -240,7 +266,7 @@
       "console": []
     },
     {
-      "id": "TqIu",
+      "id": "DnEU",
       "code_hash": "105b3e945c4e99692467ef5f06a74eda",
       "outputs": [
         {
@@ -260,7 +286,7 @@
       ]
     },
     {
-      "id": "Vxnm",
+      "id": "ulZA",
       "code_hash": "fd3d62171851ee938ccf0263403597aa",
       "outputs": [
         {
@@ -273,7 +299,7 @@
       "console": []
     },
     {
-      "id": "DnEU",
+      "id": "ecfG",
       "code_hash": "4804282e0675c3da28027270d22fd61e",
       "outputs": [
         {
@@ -286,7 +312,7 @@
       "console": []
     },
     {
-      "id": "ulZA",
+      "id": "Pvdt",
       "code_hash": "d7837b1e770d53f128a889591b1d8e9f",
       "outputs": [
         {
@@ -299,7 +325,7 @@
       "console": []
     },
     {
-      "id": "ecfG",
+      "id": "ZBYS",
       "code_hash": "be739f012f4bf6f3dfa01a67c5feca3a",
       "outputs": [
         {
@@ -312,7 +338,7 @@
       "console": []
     },
     {
-      "id": "Pvdt",
+      "id": "aLJB",
       "code_hash": "001e08e5353481e41e16c9b44dcce291",
       "outputs": [
         {
@@ -325,7 +351,7 @@
       "console": []
     },
     {
-      "id": "ZBYS",
+      "id": "nHfw",
       "code_hash": "9df30e2ed10f63912e3414379a53eb74",
       "outputs": [
         {
