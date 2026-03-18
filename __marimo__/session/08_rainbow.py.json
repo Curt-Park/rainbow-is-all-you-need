@@ -33,7 +33,7 @@
     },
     {
       "id": "vblA",
-      "code_hash": "3c9413fc7a904e5762e188b2a08bee2f",
+      "code_hash": "fbfb11642832c2b4bc1d6cd66cc49403",
       "outputs": [
         {
           "type": "data",
@@ -163,7 +163,7 @@
     },
     {
       "id": "Hstk",
-      "code_hash": "a658ad13ba1c94209154c955b60c7071",
+      "code_hash": "1eacceba3227762756923b5174745aaa",
       "outputs": [
         {
           "type": "data",
@@ -300,23 +300,16 @@
     },
     {
       "id": "ecfG",
-      "code_hash": "e7b9ef1410a1284cf8d8829149b058c9",
+      "code_hash": "be739f012f4bf6f3dfa01a67c5feca3a",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/plain": ""
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Test score: 200.0</strong></span></span>"
           }
         }
       ],
-      "console": [
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": "score:  200.0\n",
-          "mimetype": "text/plain"
-        }
-      ]
+      "console": []
     },
     {
       "id": "Pvdt",

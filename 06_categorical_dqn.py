@@ -48,8 +48,8 @@ def _(mo):
 @app.cell
 def _():
     import os
-
     import warnings
+
     import gymnasium as gym
     import matplotlib.pyplot as plt
     import numpy as np
@@ -402,11 +402,12 @@ def _(Network, ReplayBuffer, gym, mo, np, optim, plt, torch, warnings):
                 state = next_state
                 score += reward
 
-            print("score: ", score)
             self.env.close()
 
             # reset
             self.env = naive_env
+
+            return score
 
         def _compute_dqn_loss(self, samples: dict[str, np.ndarray]) -> torch.Tensor:
             """Return categorical dqn loss."""
@@ -537,7 +538,7 @@ def _(mo):
 def _(DQNAgent, env, seed):
     # parameters
     num_frames = 10000
-    memory_size = 2000
+    memory_size = 10000
     batch_size = 32
     target_update = 150
     epsilon_decay = 1 / 2000
@@ -572,9 +573,10 @@ def _(mo):
 
 
 @app.cell
-def _(agent):
+def _(agent, mo):
     video_folder = "videos/categorical_dqn"
-    agent.test(video_folder=video_folder)
+    score = agent.test(video_folder=video_folder)
+    mo.output.replace(mo.md(f"**Test score: {score}**"))
     return (video_folder,)
 
 
