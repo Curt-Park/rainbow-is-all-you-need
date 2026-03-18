@@ -297,8 +297,8 @@ def _(Network, ReplayBuffer, gym, mo, np, optim, plt, torch, warnings):
 
         def select_action(self, state: np.ndarray) -> np.ndarray:
             """Select an action from the input state."""
-            # epsilon greedy policy
-            if self.epsilon > np.random.random():
+            # epsilon greedy policy (disabled during test)
+            if not self.is_test and self.epsilon > np.random.random():
                 selected_action = self.env.action_space.sample()
             else:
                 selected_action = self.dqn(

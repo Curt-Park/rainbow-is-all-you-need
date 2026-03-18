@@ -208,14 +208,16 @@ def _(F, math, nn, torch):
         def forward(self, x: torch.Tensor) -> torch.Tensor:
             """Forward method implementation.
 
-            We don't use separate statements on train / eval mode.
-            It doesn't show remarkable difference of performance.
+            In eval mode, use only the mean weights (no noise) for
+            deterministic action selection, following Google Dopamine.
             """
-            return F.linear(
-                x,
-                self.weight_mu + self.weight_sigma * self.weight_epsilon,
-                self.bias_mu + self.bias_sigma * self.bias_epsilon,
-            )
+            if self.training:
+                return F.linear(
+                    x,
+                    self.weight_mu + self.weight_sigma * self.weight_epsilon,
+                    self.bias_mu + self.bias_sigma * self.bias_epsilon,
+                )
+            return F.linear(x, self.weight_mu, self.bias_mu)
 
         @staticmethod
         def scale_noise(size: int) -> torch.Tensor:
@@ -357,6 +359,9 @@ def _(F, Network, ReplayBuffer, gym, mo, np, optim, plt, torch, warnings):
         def select_action(self, state: np.ndarray) -> np.ndarray:
             """Select an action from the input state."""
             # NoisyNet: no epsilon greedy action selection
+            # Disable noise during test for deterministic evaluation
+            if self.is_test:
+                self.dqn.eval()
             selected_action = self.dqn(torch.FloatTensor(state).to(self.device)).argmax()
             selected_action = selected_action.detach().cpu().numpy()
 
@@ -458,6 +463,7 @@ def _(F, Network, ReplayBuffer, gym, mo, np, optim, plt, torch, warnings):
 
             # reset
             self.env = naive_env
+            self.dqn.train()
 
             return score
 
@@ -560,7 +566,7 @@ def _(DQNAgent, env, seed):
     # parameters
     num_frames = 10000
     memory_size = 10000
-    batch_size = 128
+    batch_size = 32
     target_update = 150
 
     # train
