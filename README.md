@@ -22,6 +22,7 @@ Please feel free to open an issue or a pull-request if you have any idea to make
 06. CategoricalDQN [[GitHub](06_categorical_dqn.py)] [[Preview](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/06_categorical_dqn.py)]
 07. N-stepLearning [[GitHub](07_n_step_learning.py)] [[Preview](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/07_n_step_learning.py)]
 08. Rainbow [[GitHub](08_rainbow.py)] [[Preview](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/08_rainbow.py)]
+09. Rainbow IQN [[GitHub](09_rainbow_iqn.py)] [[Preview](https://molab.marimo.io/github/Curt-Park/rainbow-is-all-you-need/blob/master/09_rainbow_iqn.py)]
 
 > Click **"Run in molab"** on the preview page to open an interactive session where you can edit and run the notebook.
 
@@ -65,6 +66,7 @@ make lint      # run the linter
 06. [M. G. Bellemare et al., "A Distributional Perspective on Reinforcement Learning." arXiv preprint arXiv:1707.06887, 2017.](https://arxiv.org/pdf/1707.06887.pdf)
 07. [R. S. Sutton, "Learning to predict by the methods of temporal differences." Machine learning, 3(1):9–44, 1988.](http://incompleteideas.net/papers/sutton-88-with-erratum.pdf)
 08. [M. Hessel et al., "Rainbow: Combining Improvements in Deep Reinforcement Learning." arXiv preprint arXiv:1710.02298, 2017.](https://arxiv.org/pdf/1710.02298.pdf)
+09. [W. Dabney et al., "Implicit Quantile Networks for Distributional Reinforcement Learning." arXiv preprint arXiv:1806.06923, 2018.](https://arxiv.org/pdf/1806.06923.pdf)
 
 ## Contributors
 
