@@ -82,11 +82,10 @@ def _(mo):
     1. DQN
     2. Double DQN
     3. Prioritized Experience Replay
-    4. Noisy Network
-    5. **IQN** (replacing C51)
-    6. N-step Learning
-
-    Note: Unlike tutorial 08, we **omit the Dueling Network** here. Empirically, the dueling architecture [degrades IQN performance](https://github.com/medipixel/rl_algorithms/pull/137) — likely because the per-quantile value/advantage decomposition interferes with the implicit quantile function learning.
+    4. Dueling Network
+    5. Noisy Network
+    6. **IQN** (replacing C51)
+    7. N-step Learning
 
     IQN replaces C51 as the distributional component; all other Rainbow components remain. The key advantage: **no need to specify $V_{\min}$, $V_{\max}$, or atom size** — the network learns the full quantile function implicitly.
 
@@ -581,17 +580,20 @@ def _(F, math, nn, torch):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    ## NoisyNet + IQN
+    ## NoisyNet + DuelingNet + IQN
 
-    - **NoisyNet**: NoisyLinear layers replace standard linear layers in the output head, providing learned exploration noise.
-    - **IQN integration**: The cosine embedding + Hadamard product happen between the shared feature layer and the NoisyLinear output head.
+    The three components integrate as follows:
+
+    - **NoisyNet + DuelingNet**: Same as tutorial 08 — NoisyLinear layers in the advantage and value streams.
+    - **DuelingNet + IQN**: The dueling architecture applies **per-quantile** — each quantile sample gets its own value + advantage decomposition.
+    - **IQN integration**: The cosine embedding + Hadamard product happen between the shared feature layer and the dueling split.
 
     ```
     state_features = feature_layer(x)                    # (batch, 128)
     cos_embed = cos(pi * i * tau)                        # (batch*n_tau, embed_dim)
     tau_features = relu(cos_linear(cos_embed))           # (batch*n_tau, 128)
     combined = state_features * tau_features             # (batch*n_tau, 128) via Hadamard
-    -> noisy_hidden -> noisy_output -> quantile values
+    -> advantage_stream -> value_stream -> dueling aggregation -> quantile values
     ```
     """)
     return
@@ -619,9 +621,13 @@ def _(F, NoisyLinear, nn, torch):
                 "i_pi", torch.pi * torch.arange(1, quantile_embedding_dim + 1, dtype=torch.float32)
             )
 
-            # set output layer (no dueling — it degrades IQN performance)
-            self.fc_hidden_layer = NoisyLinear(128, 128)
-            self.fc_layer = NoisyLinear(128, out_dim)
+            # set advantage layer
+            self.advantage_hidden_layer = NoisyLinear(128, 128)
+            self.advantage_layer = NoisyLinear(128, out_dim)
+
+            # set value layer
+            self.value_hidden_layer = NoisyLinear(128, 128)
+            self.value_layer = NoisyLinear(128, 1)
 
         def forward(self, x: torch.Tensor, n_tau_samples: int = 32) -> torch.Tensor:
             """Forward method: sample taus, get quantile values, average for Q-values."""
@@ -664,9 +670,13 @@ def _(F, NoisyLinear, nn, torch):
             features_expanded = features.unsqueeze(1).expand(-1, n_tau, -1).reshape(batch_size * n_tau, -1)
             combined = features_expanded * tau_features
 
-            # Output head
-            hidden = F.relu(self.fc_hidden_layer(combined))
-            q = self.fc_layer(hidden)  # (batch * n_tau, out_dim)
+            # Dueling streams
+            adv_hid = F.relu(self.advantage_hidden_layer(combined))
+            val_hid = F.relu(self.value_hidden_layer(combined))
+
+            advantage = self.advantage_layer(adv_hid)  # (batch * n_tau, out_dim)
+            value = self.value_layer(val_hid)  # (batch * n_tau, 1)
+            q = value + advantage - advantage.mean(dim=1, keepdim=True)
 
             # Reshape to (batch, n_tau, out_dim)
             q = q.view(batch_size, n_tau, self.out_dim)
@@ -674,8 +684,10 @@ def _(F, NoisyLinear, nn, torch):
 
         def reset_noise(self):
             """Reset all noisy layers."""
-            self.fc_hidden_layer.reset_noise()
-            self.fc_layer.reset_noise()
+            self.advantage_hidden_layer.reset_noise()
+            self.advantage_layer.reset_noise()
+            self.value_hidden_layer.reset_noise()
+            self.value_layer.reset_noise()
 
     return (Network,)
 
@@ -1135,7 +1147,7 @@ def _(DQNAgent, env, seed):
     num_frames = 20000
     memory_size = 5000
     batch_size = 32
-    target_update = 50
+    target_update = 100
 
     # train
     agent = DQNAgent(env, memory_size, batch_size, target_update, seed)
