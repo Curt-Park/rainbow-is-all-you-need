@@ -40,14 +40,9 @@ make setup
 
 ## How to Run
 
-Run any notebook interactively in your browser:
+Run and experiment with any notebook:
 ```
-marimo edit 01_dqn.py
-```
-
-Or run as a script:
-```
-marimo run 01_dqn.py
+make run notebook=01_dqn.py
 ```
 
 ## Development

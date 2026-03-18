@@ -1182,7 +1182,7 @@ requires-dist = [
     { name = "matplotlib", specifier = ">=3.5.1" },
     { name = "moviepy", specifier = ">=1.0.3" },
     { name = "numpy" },
-    { name = "torch", specifier = ">=2.2.0" },
+    { name = "torch", specifier = ">=2.7.0" },
 ]
 
 [package.metadata.requires-dev]

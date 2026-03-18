@@ -108,3 +108,6 @@ videos/
 
 # images
 *.png
+
+# marimo session snapshots
+__marimo__/

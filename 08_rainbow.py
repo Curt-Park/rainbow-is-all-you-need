@@ -13,7 +13,7 @@
 import marimo
 
 __generated_with = "0.21.0"
-app = marimo.App()
+app = marimo.App(width="full")
 
 
 @app.cell
@@ -56,6 +56,7 @@ def _(mo):
 @app.cell
 def _():
     import math
+    import os
     import random
     from collections import deque
     from typing import Deque, Dict, List, Tuple
@@ -86,6 +87,7 @@ def _():
         nn,
         np,
         optim,
+        os,
         plt,
         random,
         torch,

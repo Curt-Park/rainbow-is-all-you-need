@@ -7,6 +7,9 @@ setup:
 setup-dev:
 	uv sync
 
+run:
+	marimo edit $(notebook)
+
 lint:
 	uv run ruff check .
 

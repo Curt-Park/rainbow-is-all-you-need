@@ -13,7 +13,7 @@
 import marimo
 
 __generated_with = "0.21.0"
-app = marimo.App()
+app = marimo.App(width="full")
 
 
 @app.cell
@@ -69,19 +69,7 @@ def _():
     import torch.nn.functional as F
     import torch.optim as optim
 
-    return (
-        Dict,
-        F,
-        List,
-        Tuple,
-        gym,
-        nn,
-        np,
-        optim,
-        os,
-        plt,
-        torch,
-    )
+    return Dict, F, List, Tuple, gym, nn, np, optim, os, plt, torch
 
 
 @app.cell(hide_code=True)
@@ -210,19 +198,7 @@ def _(mo):
 
 
 @app.cell
-def _(
-    Dict,
-    F,
-    List,
-    Network,
-    ReplayBuffer,
-    Tuple,
-    gym,
-    np,
-    optim,
-    plt,
-    torch,
-):
+def _(Dict, F, List, Network, ReplayBuffer, Tuple, gym, np, optim, plt, torch):
     class DQNAgent:
         """DQN Agent interacting with environment.
 
@@ -571,6 +547,7 @@ def _(mo, os, video_folder):
 
     latest_file = show_latest_video(video_folder=video_folder)
     mo.output.replace(mo.video(src=open(latest_file, "rb").read()))
+    return
 
 
 if __name__ == "__main__":
