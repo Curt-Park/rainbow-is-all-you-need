@@ -1050,8 +1050,8 @@ def _(
             # Quantile Huber loss: (batch, n_tau, n_tau_prime)
             quantile_huber_loss = (quantile_weights * huber_loss / self.kappa)
 
-            # Average over tau_prime, sum over tau, then per-sample loss
-            elementwise_loss = quantile_huber_loss.mean(dim=2).sum(dim=1)
+            # Average over both tau and tau_prime for per-sample loss
+            elementwise_loss = quantile_huber_loss.mean(dim=2).mean(dim=1)
 
             return elementwise_loss
 
@@ -1135,7 +1135,7 @@ def _(DQNAgent, env, seed):
     num_frames = 20000
     memory_size = 5000
     batch_size = 32
-    target_update = 100
+    target_update = 50
 
     # train
     agent = DQNAgent(env, memory_size, batch_size, target_update, seed)
