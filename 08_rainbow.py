@@ -1056,9 +1056,9 @@ def _(mo):
 @app.cell
 def _(DQNAgent, env, seed):
     # parameters
-    num_frames = 10000
-    memory_size = 10000
-    batch_size = 128
+    num_frames = 20000
+    memory_size = 5000
+    batch_size = 32
     target_update = 100
 
     # train

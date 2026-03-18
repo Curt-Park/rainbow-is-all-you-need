@@ -40,9 +40,7 @@ def _(mo):
     A multi-step variant of DQN is then defined by minimizing the alternative loss,
 
     $$
-    (R^{(n)}_t + \gamma^{(n)}_t \max_{a'} q_{\theta}^{-}
-    (S_{t+n}, a')
-    - q_{\theta}(S_t, A_t))^2.
+    (R^{(n)}_t + \gamma^{(n)}_t \max_{a'} q_{\theta}^{-}(S_{t+n}, a') - q_{\theta}(S_t, A_t))^2.
     $$
 
     Multi-step targets with suitably tuned $n$ often lead to faster learning (Sutton and Barto 1998).
@@ -590,8 +588,8 @@ def _(mo):
 @app.cell
 def _(DQNAgent, env, seed):
     # parameters
-    num_frames = 10000
-    memory_size = 10000
+    num_frames = 20000
+    memory_size = 5000
     batch_size = 32
     target_update = 100
     epsilon_decay = 1 / 2000
