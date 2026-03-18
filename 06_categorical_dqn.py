@@ -163,13 +163,17 @@ def _(F, nn, torch):
 
             return q
 
+        def _logits(self, x: torch.Tensor) -> torch.Tensor:
+            """Get raw logits for atom distributions."""
+            return self.layers(x).view(-1, self.out_dim, self.atom_size)
+
         def dist(self, x: torch.Tensor) -> torch.Tensor:
             """Get distribution for atoms."""
-            q_atoms = self.layers(x).view(-1, self.out_dim, self.atom_size)
-            dist = F.softmax(q_atoms, dim=-1)
-            dist = dist.clamp(min=1e-3)  # for avoiding nans
+            return F.softmax(self._logits(x), dim=-1)
 
-            return dist
+        def log_dist(self, x: torch.Tensor) -> torch.Tensor:
+            """Get log-distribution for atoms (numerically stable)."""
+            return F.log_softmax(self._logits(x), dim=-1)
 
     return (Network,)
 
@@ -450,8 +454,8 @@ def _(Network, ReplayBuffer, gym, mo, np, optim, plt, torch, warnings):
                     (next_dist * (b - l.float())).view(-1),
                 )
 
-            dist = self.dqn.dist(state)
-            log_p = torch.log(dist[range(self.batch_size), action])
+            log_dist = self.dqn.log_dist(state)
+            log_p = log_dist[range(self.batch_size), action]
 
             loss = -(proj_dist * log_p).sum(1).mean()
 

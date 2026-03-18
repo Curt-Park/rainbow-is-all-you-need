@@ -591,8 +591,8 @@ def _(F, NoisyLinear, nn, torch):
 
             return q
 
-        def dist(self, x: torch.Tensor) -> torch.Tensor:
-            """Get distribution for atoms."""
+        def _logits(self, x: torch.Tensor) -> torch.Tensor:
+            """Get raw logits for atom distributions."""
             feature = self.feature_layer(x)
             adv_hid = F.relu(self.advantage_hidden_layer(feature))
             val_hid = F.relu(self.value_hidden_layer(feature))
@@ -601,10 +601,15 @@ def _(F, NoisyLinear, nn, torch):
             value = self.value_layer(val_hid).view(-1, 1, self.atom_size)
             q_atoms = value + advantage - advantage.mean(dim=1, keepdim=True)
 
-            dist = F.softmax(q_atoms, dim=-1)
-            dist = dist.clamp(min=1e-3)  # for avoiding nans
+            return q_atoms
 
-            return dist
+        def dist(self, x: torch.Tensor) -> torch.Tensor:
+            """Get distribution for atoms."""
+            return F.softmax(self._logits(x), dim=-1)
+
+        def log_dist(self, x: torch.Tensor) -> torch.Tensor:
+            """Get log-distribution for atoms (numerically stable)."""
+            return F.log_softmax(self._logits(x), dim=-1)
 
         def reset_noise(self):
             """Reset all noisy layers."""
@@ -968,8 +973,8 @@ def _(
                     (next_dist * (b - l.float())).view(-1),
                 )
 
-            dist = self.dqn.dist(state)
-            log_p = torch.log(dist[range(self.batch_size), action])
+            log_dist = self.dqn.log_dist(state)
+            log_p = log_dist[range(self.batch_size), action]
             elementwise_loss = -(proj_dist * log_p).sum(1)
 
             return elementwise_loss
