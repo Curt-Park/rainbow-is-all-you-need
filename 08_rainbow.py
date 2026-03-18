@@ -512,14 +512,15 @@ def _(F, math, nn, torch):
         def forward(self, x: torch.Tensor) -> torch.Tensor:
             """Forward method implementation.
 
-            We don't use separate statements on train / eval mode.
-            It doesn't show remarkable difference of performance.
+            In eval mode, use only the mean weights (no noise) for greedy action selection.
             """
-            return F.linear(
-                x,
-                self.weight_mu + self.weight_sigma * self.weight_epsilon,
-                self.bias_mu + self.bias_sigma * self.bias_epsilon,
-            )
+            if self.training:
+                return F.linear(
+                    x,
+                    self.weight_mu + self.weight_sigma * self.weight_epsilon,
+                    self.bias_mu + self.bias_sigma * self.bias_epsilon,
+                )
+            return F.linear(x, self.weight_mu, self.bias_mu)
 
         @staticmethod
         def scale_noise(size: int) -> torch.Tensor:
@@ -777,6 +778,10 @@ def _(
         def select_action(self, state: np.ndarray) -> np.ndarray:
             """Select an action from the input state."""
             # NoisyNet: no epsilon greedy action selection
+            # Use eval mode during test to disable noise
+            if self.is_test:
+                self.dqn.eval()
+
             selected_action = self.dqn(torch.FloatTensor(state).to(self.device)).argmax()
             selected_action = selected_action.detach().cpu().numpy()
 
