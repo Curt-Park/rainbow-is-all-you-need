@@ -67,6 +67,7 @@ def _(mo):
 def _():
     import os
 
+    import warnings
     import gymnasium as gym
     import matplotlib.pyplot as plt
     import numpy as np
@@ -230,6 +231,7 @@ def _(
     ReplayBuffer,
     clip_grad_norm_,
     gym,
+    mo,
     np,
     optim,
     plt,
@@ -405,7 +407,9 @@ def _(
 
             # for recording a video
             naive_env = self.env
-            self.env = gym.wrappers.RecordVideo(self.env, video_folder=video_folder)
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", UserWarning)
+                self.env = gym.wrappers.RecordVideo(self.env, video_folder=video_folder)
 
             state, _ = self.env.reset(seed=self.seed)
             done = False
@@ -468,7 +472,7 @@ def _(
             plt.subplot(133)
             plt.title("epsilons")
             plt.plot(epsilons)
-            plt.show()
+            mo.output.replace(mo.as_html(plt.gcf()))
 
     return (DQNAgent,)
 

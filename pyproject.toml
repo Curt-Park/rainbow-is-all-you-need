@@ -13,11 +13,6 @@ dependencies = [
     "torch>=2.7.0",
 ]
 
-[dependency-groups]
-dev = [
-    "ruff>=0.11.0",
-]
-
 [tool.ruff]
 line-length = 100
 target-version = "py312"

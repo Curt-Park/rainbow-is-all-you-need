@@ -60,6 +60,7 @@ def _(mo):
 def _():
     import os
 
+    import warnings
     import gymnasium as gym
     import matplotlib.pyplot as plt
     import numpy as np
@@ -68,7 +69,7 @@ def _():
     import torch.nn.functional as F
     import torch.optim as optim
 
-    return F, gym, nn, np, optim, os, plt, torch
+    return F, gym, nn, np, optim, os, plt, torch, warnings
 
 
 @app.cell(hide_code=True)
@@ -197,7 +198,7 @@ def _(mo):
 
 
 @app.cell
-def _(F, Network, ReplayBuffer, gym, np, optim, plt, torch):
+def _(F, Network, ReplayBuffer, gym, mo, np, optim, plt, torch, warnings):
     class DQNAgent:
         """DQN Agent interacting with environment.
 
@@ -366,7 +367,9 @@ def _(F, Network, ReplayBuffer, gym, np, optim, plt, torch):
 
             # for recording a video
             naive_env = self.env
-            self.env = gym.wrappers.RecordVideo(self.env, video_folder=video_folder)
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", UserWarning)
+                self.env = gym.wrappers.RecordVideo(self.env, video_folder=video_folder)
 
             state, _ = self.env.reset(seed=self.seed)
             done = False
@@ -429,7 +432,7 @@ def _(F, Network, ReplayBuffer, gym, np, optim, plt, torch):
             plt.subplot(133)
             plt.title("epsilons")
             plt.plot(epsilons)
-            plt.show()
+            mo.output.replace(mo.as_html(plt.gcf()))
 
     return (DQNAgent,)
 

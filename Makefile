@@ -2,9 +2,6 @@ init:
 	mise trust && mise install
 
 setup:
-	uv sync --no-dev
-
-setup-dev:
 	uv sync
 
 run:

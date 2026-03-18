@@ -48,7 +48,6 @@ make run notebook=01_dqn.py
 ## Development
 
 ```
-make setup-dev # install the static analyzer as well
 make format    # run the formatter
 make lint      # run the linter
 ```
