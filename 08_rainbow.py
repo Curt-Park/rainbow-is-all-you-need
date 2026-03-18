@@ -809,7 +809,7 @@ def _(
             """Update the model by gradient descent."""
             # PER needs beta to calculate weights
             samples = self.memory.sample_batch(self.beta)
-            weights = torch.FloatTensor(samples["weights"].reshape(-1, 1)).to(self.device)
+            weights = torch.FloatTensor(samples["weights"]).to(self.device)
             indices = samples["indices"]
 
             # 1-step Learning loss
