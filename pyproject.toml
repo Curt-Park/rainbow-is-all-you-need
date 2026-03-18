@@ -10,7 +10,7 @@ dependencies = [
     "matplotlib>=3.5.1",
     "moviepy>=1.0.3",
     "numpy",
-    "torch>=2.2.0",
+    "torch>=2.7.0",
 ]
 
 [dependency-groups]
