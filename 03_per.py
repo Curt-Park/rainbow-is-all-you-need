@@ -514,6 +514,7 @@ def _(
             # PER
             # In DQN, We used "ReplayBuffer(obs_dim, memory_size, batch_size)"
             self.beta = beta
+            self.beta_initial = beta
             self.prior_eps = prior_eps
             self.memory = PrioritizedReplayBuffer(obs_dim, memory_size, batch_size, alpha)
 
@@ -599,7 +600,7 @@ def _(
 
                 # PER: increase beta
                 fraction = min(frame_idx / num_frames, 1.0)
-                self.beta = self.beta + fraction * (1.0 - self.beta)
+                self.beta = self.beta_initial + fraction * (1.0 - self.beta_initial)
 
                 # if episode ends
                 if done:
