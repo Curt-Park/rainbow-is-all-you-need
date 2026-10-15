@@ -814,6 +814,11 @@ def _(
                 if one_step_transition:
                     self.memory.store(*one_step_transition)
 
+                # Keep full n-step windows within one trajectory. Unlike termination,
+                # truncation still bootstraps, so it cannot cut a cross-reset window.
+                if truncated and self.use_n_step:
+                    self.memory_n.n_step_buffer.clear()
+
             return next_state, reward, done
 
         def update_model(self) -> torch.Tensor:
