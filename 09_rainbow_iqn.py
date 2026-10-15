@@ -63,7 +63,7 @@ def _(mo):
 
     ### 3. Quantile Huber Loss
 
-    Training uses an asymmetric loss. For quantile $\tau$, overestimation errors (positive) are weighted by $\tau$, underestimation errors (negative) by $(1 - \tau)$. Combined with Huber loss for robustness:
+    Training uses an asymmetric loss. With error $u$ defined as target minus prediction, underestimation errors (positive) are weighted by $\tau$, and overestimation errors (negative) by $(1 - \tau)$. Combined with Huber loss for robustness:
 
     $$\rho_\tau^\kappa(u) = |\tau - \mathbf{1}(u < 0)| \cdot \frac{\mathcal{L}_\kappa(u)}{\kappa}$$
 

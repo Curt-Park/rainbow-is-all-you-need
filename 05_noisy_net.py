@@ -39,7 +39,7 @@ def _(mo):
     y = wx + b,
     $$
 
-    where $x \in \mathbb{R}^p$ is the layer input, $w \in \mathbb{R}^{q \times p}$, and $b \in \mathbb{R}$ the bias.
+    where $x \in \mathbb{R}^p$ is the layer input, $w \in \mathbb{R}^{q \times p}$, and $b \in \mathbb{R}^q$ the bias.
 
     The corresponding noisy linear layer is defined as:
 
@@ -55,7 +55,7 @@ def _(mo):
     $$
     \begin{align}
     \epsilon_{i,j}^w &= f(\epsilon_i) f(\epsilon_j),\\
-    \epsilon_{j}^b &= f(\epsilon_i),\\
+    \epsilon_{j}^b &= f(\epsilon_j),\\
     \text{where } f(x) &= sgn(x) \sqrt{|x|}.
     \end{align}
     $$
